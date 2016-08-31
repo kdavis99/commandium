@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+   <head>
+      <title>Chrome Commands</title>
+      <style>
+         body {
+            overflow: hidden;
+            margin: 0px;
+            padding: 0px;
+            background: white;
+         }
+
+         div:first-child {
+            margin-top: 0px;
+         }
+
+         div {
+            cursor: pointer;
+            text-align: center;
+            padding: 1px 3px;
+            font-family: sans-serif;
+            font-size: 0.8em;
+            width: 100px;
+            margin-top: 1px;
+            background: #cccccc;
+         }
+         div:hover {
+            background: #aaaaaa;
+         }
+      </style>
+      <script type="text/javascript" src="popup.js"></script>
+      <script type="text/javascript" src="commandium.js"></script>
+   </head>
+   <body>
+      <form>
+         <textarea rows="8" cols="50" id="user_input" placeholder="<commands here>"></textarea>
+         <button type="submit" id="user" value="Submit">Run</button>
+      </form>
+   </body>
+</html>
