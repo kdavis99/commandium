@@ -28,6 +28,7 @@
 [0-9]+("."[0-9]+)?\b  return 'T_NUM'
 "cp"		      return 'T_CP'
 "rm"		      return 'T_RM'
+"act"		      return 'T_ACTIVE'
 ";"		      return 'T_SEMIC'
 <<EOF>>	 	      return 'EOF'
 .                     return 'INVALID'
@@ -65,26 +66,41 @@ command
      {{
 	chrome.tabs.remove(all_tabs[$2].id);
      }}
+  | T_ACT T_NUM T_SEMIC 
+     {{
+	chrome.tabs.update(all_tabs[$2].id, {active: true});
+     }}
   | T_CP T_STRING_CONST T_SEMIC 
      {{
-	title_substr = $2.substring(1, $2.length - 1)
+	// removes the double quotes (") from a string const
+	title_substr = $2.substring(1, $2.length - 1).toLowerCase();
 	for (m_id in map_tabs) {
-	  console.log(map_tabs[m_id].url + " -- " + map_tabs[m_id].title + " " +title_substr.toLowerCase());
-	  if (map_tabs[m_id].url.toLowerCase().includes(title_substr.toLowerCase()) || 
-		map_tabs[m_id].title.toLowerCase().includes(title_substr.toLowerCase())) {
-		  console.log("dups");
+	  if (map_tabs[m_id].url.toLowerCase().includes(title_substr) || 
+		map_tabs[m_id].title.toLowerCase().includes(title_substr)) {
 		  chrome.tabs.duplicate(map_tabs[m_id].id);
 	  }
 	}
      }}
   | T_RM T_STRING_CONST T_SEMIC 
      {{
-	title_substr = $2.substring(1, $2.length - 1)
+	// removes the double quotes (") from a string const
+	title_substr = $2.substring(1, $2.length - 1).toLowerCase();
 	for (m_id in map_tabs) {
-	  if (map_tabs[m_id].url.toLowerCase().includes(title_substr.toLowerCase()) || 
-		map_tabs[m_id].title.toLowerCase().includes(title_substr.toLowerCase())) {
-		  console.log("rmmms");
+	  if (map_tabs[m_id].url.toLowerCase().includes(title_substr) || 
+		map_tabs[m_id].title.toLowerCase().includes(title_substr)) {
 		  chrome.tabs.remove(map_tabs[m_id].id);
+	  }
+	}
+     }}
+  | T_ACTIVE T_STRING_CONST T_SEMIC
+     {{
+	// removes the double quotes (") from a string const
+	title_substr = $2.substring(1, $2.length - 1).toLowerCase();
+	for (m_id in map_tabs) {
+	  if (map_tabs[m_id].url.toLowerCase().includes(title_substr) || 
+		map_tabs[m_id].title.toLowerCase().includes(title_substr)) {
+		  chrome.tabs.update(map_tabs[m_id].id, {active: true});
+                  break;
 	  }
 	}
      }}
