@@ -2,11 +2,8 @@
    "name": "Chrome Commands TODO(kylee): better name",
    "description": "TODO(kylee): be clever about this later.",
    "version": "1.0",
-   "content_security_policy": "script-src 'self' https://calendar.google.com https://apis.google.com; object-src 'self'",
    "permissions": [
-      "tabs", "browsingData", "http://*/*", "https://*/*",
-      "https://www.googleapis.com/auth/calendar",
-      "*://apis.google.com/*"
+      "tabs", "browsingData", "http://*/*", "https://*/*", "*://apis.google.com/*"
    ],
    "browser_action": {
       "default_title": "Set this page's color.",
