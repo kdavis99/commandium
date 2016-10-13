@@ -24,7 +24,7 @@
 
 \s+                   /* skip whitespace */
 \"[^"]*\"	      return 'T_STRING_CONST'
-[0-9]+("."[0-9]+)?\b  return 'T_NUM'
+[0-9]+("."[0-9]+)?\b  return 'T_NUM_CONST'
 "cp"		      return 'T_CP'
 "rm"		      return 'T_RM'
 "act"		      return 'T_ACTIVE'
@@ -32,9 +32,28 @@
 "cal"		      return 'T_CAL'
 "title"		      return 'T_TITLE'
 "date"		      return 'T_DATE'
+"-"		      return 'T_DASH'
+"@"		      return 'T_AT'
+"/"		      return 'T_SLASH'
 ";"		      return 'T_SEMIC'
+":"		      return 'T_COLON'
+","		      return 'T_COMMA'
 "{"		      return 'T_LBRACE'
 "}"		      return 'T_RBRACE'
+[Pp][Mm]              return 'T_PM'
+[Aa][Mm]              return 'T_AM'
+[Jj](an)              return 'T_JAN'
+[Ff](eb)              return 'T_FEB'
+[Mm](ar)              return 'T_MAR'
+[Aa](pr)              return 'T_APR'
+[Mm](ay)              return 'T_MAY'
+[Jj](un)              return 'T_JUN'
+[Jj](ul)              return 'T_JUL'
+[Aa](ug)              return 'T_AUG'
+[Ss](ep)              return 'T_SEP'
+[Oo](ct)              return 'T_OCT'
+[Nn](ov)              return 'T_NOV'
+[Dd](ec)              return 'T_DEC'
 "pls"		      return 'T_PLS'
 <<EOF>>	 	      return 'EOF'
 .                     return 'INVALID'
@@ -87,6 +106,51 @@ details
     }}
   ;
 
+month
+  : T_JAN
+  | T_FEB
+  | T_MAR
+  | T_APR
+  | T_MAY
+  | T_JUN
+  | T_JUL
+  | T_AUG
+  | T_SEP
+  | T_OCT
+  | T_NOV
+  | T_DEC
+  ;
+
+date
+  : month T_NUM_CONST T_COMMA T_NUM_CONST
+    {{
+	$$ = ($1 + " " + $2.toString() + ", " + $4.toString());
+    }}
+  | month T_NUM_CONST
+    {{
+	$$ = ($1 + " " + $2.toString());
+    }}
+  ;
+
+time
+  : T_NUM_CONST T_COLON T_NUM_CONST period
+    {{
+	var hour;
+	console.log($4);
+	if ($4 == "pm") {
+	  hour = parseInt($1) + parseInt(12);
+        } else {
+          hour = $1;
+        }
+        $$ = (hour.toString() + ":" + $3.toString());
+    }}
+  ;
+
+period
+  : T_AM
+  | T_PM
+  ;
+
 detail
   : T_TITLE T_STRING_CONST T_SEMIC
     {{
@@ -94,67 +158,165 @@ detail
 	str = str.substring(1, $2.length - 1);
 	details["text"] = str;
     }}
-  | T_DATE T_STRING_CONST T_SEMIC
+  | T_DATE date T_AT time T_DASH time T_SEMIC
     {{
-	var begin, end, full_string_date;
-	if ($2.includes("-")) {
-	  var str = $2.replace(/ /g, "");
-	  var middle = $2.indexOf("-");
-	  console.log("-" + $2.substring(1, middle) + "-");
-	  console.log("-" + $2.substring(middle + 1, $2.length - 1) + "-");
-	  begin = new Date($2.substring(1, middle));
-	  end = new Date($2.substring(middle + 1, $2.length - 1));
-	  console.log(begin + " -- " + end);
-        }
-	  var cur_date = new Date();
-	  var year = cur_date.getFullYear();
-	  if (cur_date.getMonth().toString() > begin.getMonth().toString()) {
-	     year = year + 1;
-	  }
-	  var beg_month, end_month, beg_date, end_date;
-	  if ((begin.getMonth() + 1).toString().length == 1) {
-		beg_month = "0" + (begin.getMonth() + 1).toString();
-	  	console.log(beg_date + year);
-	  } else {
-		beg_month = (begin.getMonth() + 1).toString();
-	  	console.log(beg_month + year);
-	  }
+	var cur_date = new Date();
+ 	var begin = new Date($2 + " " + $4);
+	var end = new Date($2 + " " + $6);
+	console.log(begin + " -- " + end);
+	var year = cur_date.getFullYear();
+	var beg_year, beg_month, beg_date, full_string_date;
+	var beg_hours, beg_minutes, end_hours, end_minutes;
 
-	  if ((end.getMonth() + 1).toString().length == 1) {
-		end_month = "0" + (end.getMonth() + 1).toString();
-	  } else {
-		end_month = (end.getMonth() + 1).toString();
-	  }
+	if (begin.getFullYear() == 2001 &&
+	     cur_date.getMonth() > begin.getMonth()) {
+	   beg_year = (year + 1).toString();
+	} else if (begin.getFullYear() == 2001) {
+	   beg_year = year;
+	} else {
+	   beg_year = begin.getFullYear().toString();
+	}
 
-	  if (begin.getDate().toString().length == 1) {
-		beg_date = "0" + (begin.getDate()).toString();
-	  } else {
-		beg_date = begin.getDate().toString();
-	  }
+	if ((begin.getMonth() + 1).toString().length == 1) {
+	  beg_month = "0" + (begin.getMonth() + 1).toString();
+	  console.log(beg_date + year);
+	} else {
+       	  beg_month = (begin.getMonth() + 1).toString();
+	  console.log(beg_month + year);
+	}
 
-	  if (end.getDate().toString().length == 1) {
-		end_date = "0" + (end.getDate()).toString();
-	  } else {
-		end_date = end.getDate().toString();
-	  }
+	if (begin.getDate().toString().length == 1) {
+	  beg_date = "0" + (begin.getDate()).toString();
+	} else {
+	  beg_date = begin.getDate().toString();
+	}
 
-	  full_string_date = year + beg_month + beg_date + "T" + "/" + year + end_month + end_date + "T";
+	if (begin.getHours().toString().length == 1) {
+	  beg_hours = "0" + (begin.getHours()).toString();
+	} else {
+	  beg_hours = begin.getHours().toString();
+	}
+
+	if (end.getHours().toString().length == 1) {
+	  end_hours = "0" + (end.getHours()).toString();
+	} else {
+	  end_hours = end.getHours().toString();
+	}
+
+	if (begin.getMinutes().toString().length == 1) {
+	  beg_minutes = "0" + (begin.getMinutes()).toString();
+	} else {
+	  beg_minutes = begin.getMinutes().toString();
+	}
+
+	if (end.getMinutes().toString().length == 1) {
+	  end_minutes = "0" + (end.getMinutes()).toString();
+	} else {
+	  end_minutes = end.getMinutes().toString();
+	}
+
+	full_string_date = beg_year + beg_month + beg_date + "T" + beg_hours + beg_minutes + "00"
+                            + "/" + beg_year + beg_month + beg_date + "T" + end_hours + end_minutes + "00";
+		
+	details["dates"] = full_string_date;
+    }}
+  | T_DATE date T_AT time T_DASH date T_AT time T_SEMIC
+    {{
+	var cur_date = new Date();
+	console.log($6 + " " + $8 + " -- " + $2 + " " + $4);
+ 	begin = new Date($2 + " " + $4);
+ 	end = new Date($6 + " " + $8);
+	console.log(end + " -- " + begin);
+	var year = cur_date.getFullYear();
+	var beg_year, end_year, beg_month, end_month, beg_date, end_date, full_string_date;
+	var beg_hours, end_hours, beg_minutes, end_minutes;
+
+	if (begin.getFullYear() == 2001 &&
+	     cur_date.getMonth() > begin.getMonth()) {
+	   beg_year = (year + 1).toString();
+	} else if (begin.getFullYear() == 2001) {
+	   beg_year = year;
+	} else {
+	   beg_year = begin.getFullYear().toString();
+	}
+
+	if (end.getFullYear() == 2001 &&
+	     cur_date.getMonth() > end.getMonth()) {
+	   end_year = (year + 1).toString();
+	} else if (end.getFullYear() == 2001) {
+	   end_year = year;
+	} else {
+	   end_year = end.getFullYear().toString();
+	}
+
+	if ((begin.getMonth() + 1).toString().length == 1) {
+	  beg_month = "0" + (begin.getMonth() + 1).toString();
+	  console.log(beg_date + year);
+	} else {
+       	  beg_month = (begin.getMonth() + 1).toString();
+	  console.log(beg_month + year);
+	}
+
+	if ((end.getMonth() + 1).toString().length == 1) {
+	  end_month = "0" + (end.getMonth() + 1).toString();
+	} else {
+	  end_month = (end.getMonth() + 1).toString();
+	}
+
+	if (begin.getDate().toString().length == 1) {
+	  beg_date = "0" + (begin.getDate()).toString();
+	} else {
+	  beg_date = begin.getDate().toString();
+	}
+
+	if (end.getDate().toString().length == 1) {
+	  end_date = "0" + (end.getDate()).toString();
+	} else {
+	  end_date = end.getDate().toString();
+	}
+
+	if (begin.getHours().toString().length == 1) {
+	  beg_hours = "0" + (begin.getHours()).toString();
+	} else {
+	  beg_hours = begin.getHours().toString();
+	}
+
+	if (end.getHours().toString().length == 1) {
+	  end_hours = "0" + (end.getHours()).toString();
+	} else {
+	  end_hours = end.getHours().toString();
+	}
+
+	if (begin.getMinutes().toString().length == 1) {
+	  beg_minutes = "0" + (begin.getMinutes()).toString();
+	} else {
+	  beg_minutes = begin.getMinutes().toString();
+	}
+
+	if (end.getMinutes().toString().length == 1) {
+	  end_minutes = "0" + (end.getMinutes()).toString();
+	} else {
+	  end_minutes = end.getMinutes().toString();
+	}
+
+	full_string_date = beg_year + beg_month + beg_date + "T" + beg_hours + beg_minutes + "00"
+                            + "/" + end_year + end_month + end_date + "T" + end_hours + end_minutes + "00";
 		
 	details["dates"] = full_string_date;
     }}
   ;
 
 command
-  : T_CP T_NUM T_SEMIC 
+  : T_CP T_NUM_CONST T_SEMIC 
      {{
 	console.log("dupdup" + $2);
 	chrome.tabs.duplicate(all_tabs[$2].id);
      }}
-  | T_RM T_NUM T_SEMIC 
+  | T_RM T_NUM_CONST T_SEMIC 
      {{
 	chrome.tabs.remove(all_tabs[$2].id);
      }}
-  | T_ACTIVE T_NUM T_SEMIC 
+  | T_ACTIVE T_NUM_CONST T_SEMIC 
      {{
 	chrome.tabs.update(all_tabs[$2].id, {active: true});
      }}

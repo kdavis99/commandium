@@ -86,12 +86,12 @@
       // (like duplicate). Needed for: "<name> cp; rmcps;"
    });
 var commandium = (function(){
-var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,9],$V1=[1,6],$V2=[1,7],$V3=[1,8],$V4=[5,9,18,20,21],$V5=[1,29],$V6=[1,30],$V7=[12,14,17];
+var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,9],$V1=[1,6],$V2=[1,7],$V3=[1,8],$V4=[5,9,41,42,43],$V5=[1,29],$V6=[1,30],$V7=[12,35,38],$V8=[1,36],$V9=[1,37],$Va=[1,38],$Vb=[1,39],$Vc=[1,40],$Vd=[1,41],$Ve=[1,42],$Vf=[1,43],$Vg=[1,44],$Vh=[1,45],$Vi=[1,46],$Vj=[1,47],$Vk=[1,52],$Vl=[37,40];
 var parser = {trace: function trace() { },
 yy: {},
-symbols_: {"error":2,"input":3,"commands":4,"EOF":5,"command":6,"google_cmds":7,"T_OPEN":8,"T_CAL":9,"T_LBRACE":10,"details":11,"T_RBRACE":12,"detail":13,"T_TITLE":14,"T_STRING_CONST":15,"T_SEMIC":16,"T_DATE":17,"T_CP":18,"T_NUM":19,"T_RM":20,"T_ACTIVE":21,"$accept":0,"$end":1},
-terminals_: {2:"error",5:"EOF",8:"T_OPEN",9:"T_CAL",10:"T_LBRACE",12:"T_RBRACE",14:"T_TITLE",15:"T_STRING_CONST",16:"T_SEMIC",17:"T_DATE",18:"T_CP",19:"T_NUM",20:"T_RM",21:"T_ACTIVE"},
-productions_: [0,[3,2],[4,2],[4,1],[4,1],[7,5],[11,2],[11,1],[13,3],[13,3],[6,3],[6,3],[6,3],[6,3],[6,3],[6,3],[6,2]],
+symbols_: {"error":2,"input":3,"commands":4,"EOF":5,"command":6,"google_cmds":7,"T_OPEN":8,"T_CAL":9,"T_LBRACE":10,"details":11,"T_RBRACE":12,"detail":13,"month":14,"T_JAN":15,"T_FEB":16,"T_MAR":17,"T_APR":18,"T_MAY":19,"T_JUN":20,"T_JUL":21,"T_AUG":22,"T_SEP":23,"T_OCT":24,"T_NOV":25,"T_DEC":26,"date":27,"T_NUM_CONST":28,"T_COMMA":29,"time":30,"T_COLON":31,"period":32,"T_AM":33,"T_PM":34,"T_TITLE":35,"T_STRING_CONST":36,"T_SEMIC":37,"T_DATE":38,"T_AT":39,"T_DASH":40,"T_CP":41,"T_RM":42,"T_ACTIVE":43,"$accept":0,"$end":1},
+terminals_: {2:"error",5:"EOF",8:"T_OPEN",9:"T_CAL",10:"T_LBRACE",12:"T_RBRACE",15:"T_JAN",16:"T_FEB",17:"T_MAR",18:"T_APR",19:"T_MAY",20:"T_JUN",21:"T_JUL",22:"T_AUG",23:"T_SEP",24:"T_OCT",25:"T_NOV",26:"T_DEC",28:"T_NUM_CONST",29:"T_COMMA",31:"T_COLON",33:"T_AM",34:"T_PM",35:"T_TITLE",36:"T_STRING_CONST",37:"T_SEMIC",38:"T_DATE",39:"T_AT",40:"T_DASH",41:"T_CP",42:"T_RM",43:"T_ACTIVE"},
+productions_: [0,[3,2],[4,2],[4,1],[4,1],[7,5],[11,2],[11,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[27,4],[27,2],[30,4],[32,1],[32,1],[13,3],[13,7],[13,9],[6,3],[6,3],[6,3],[6,3],[6,3],[6,3],[6,2]],
 performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
 /* this == yyval */
 
@@ -125,79 +125,200 @@ case 7:
 	console.log(" detail here ");
     
 break;
-case 8:
+case 20:
+
+	this.$ = ($$[$0-3] + " " + $$[$0-2].toString() + ", " + $$[$0].toString());
+    
+break;
+case 21:
+
+	this.$ = ($$[$0-1] + " " + $$[$0].toString());
+    
+break;
+case 22:
+
+	var hour;
+	console.log($$[$0]);
+	if ($$[$0] == "pm") {
+	  hour = parseInt($$[$0-3]) + parseInt(12);
+        } else {
+          hour = $$[$0-3];
+        }
+        this.$ = (hour.toString() + ":" + $$[$0-1].toString());
+    
+break;
+case 25:
 
 	var str = $$[$0-1].replace(/ /g, "+");
 	str = str.substring(1, $$[$0-1].length - 1);
 	details["text"] = str;
     
 break;
-case 9:
+case 26:
 
-	var begin, end, full_string_date;
-	if ($$[$0-1].includes("-")) {
-	  var str = $$[$0-1].replace(/ /g, "");
-	  var middle = $$[$0-1].indexOf("-");
-	  console.log("-" + $$[$0-1].substring(1, middle) + "-");
-	  console.log("-" + $$[$0-1].substring(middle + 1, $$[$0-1].length - 1) + "-");
-	  begin = new Date($$[$0-1].substring(1, middle));
-	  end = new Date($$[$0-1].substring(middle + 1, $$[$0-1].length - 1));
-	  console.log(begin + " -- " + end);
-        }
-	  var cur_date = new Date();
-	  var year = cur_date.getFullYear();
-	  if (cur_date.getMonth().toString() > begin.getMonth().toString()) {
-	     year = year + 1;
-	  }
-	  var beg_month, end_month, beg_date, end_date;
-	  if ((begin.getMonth() + 1).toString().length == 1) {
-		beg_month = "0" + (begin.getMonth() + 1).toString();
-	  	console.log(beg_date + year);
-	  } else {
-		beg_month = (begin.getMonth() + 1).toString();
-	  	console.log(beg_month + year);
-	  }
+	var cur_date = new Date();
+ 	var begin = new Date($$[$0-5] + " " + $$[$0-3]);
+	var end = new Date($$[$0-5] + " " + $$[$0-1]);
+	console.log(begin + " -- " + end);
+	var year = cur_date.getFullYear();
+	var beg_year, beg_month, beg_date, full_string_date;
+	var beg_hours, beg_minutes, end_hours, end_minutes;
 
-	  if ((end.getMonth() + 1).toString().length == 1) {
-		end_month = "0" + (end.getMonth() + 1).toString();
-	  } else {
-		end_month = (end.getMonth() + 1).toString();
-	  }
+	if (begin.getFullYear() == 2001 &&
+	     cur_date.getMonth() > begin.getMonth()) {
+	   beg_year = (year + 1).toString();
+	} else if (begin.getFullYear() == 2001) {
+	   beg_year = year;
+	} else {
+	   beg_year = begin.getFullYear().toString();
+	}
 
-	  if (begin.getDate().toString().length == 1) {
-		beg_date = "0" + (begin.getDate()).toString();
-	  } else {
-		beg_date = begin.getDate().toString();
-	  }
+	if ((begin.getMonth() + 1).toString().length == 1) {
+	  beg_month = "0" + (begin.getMonth() + 1).toString();
+	  console.log(beg_date + year);
+	} else {
+       	  beg_month = (begin.getMonth() + 1).toString();
+	  console.log(beg_month + year);
+	}
 
-	  if (end.getDate().toString().length == 1) {
-		end_date = "0" + (end.getDate()).toString();
-	  } else {
-		end_date = end.getDate().toString();
-	  }
+	if (begin.getDate().toString().length == 1) {
+	  beg_date = "0" + (begin.getDate()).toString();
+	} else {
+	  beg_date = begin.getDate().toString();
+	}
 
-	  full_string_date = year + beg_month + beg_date + "T" + "/" + year + end_month + end_date + "T";
+	if (begin.getHours().toString().length == 1) {
+	  beg_hours = "0" + (begin.getHours()).toString();
+	} else {
+	  beg_hours = begin.getHours().toString();
+	}
+
+	if (end.getHours().toString().length == 1) {
+	  end_hours = "0" + (end.getHours()).toString();
+	} else {
+	  end_hours = end.getHours().toString();
+	}
+
+	if (begin.getMinutes().toString().length == 1) {
+	  beg_minutes = "0" + (begin.getMinutes()).toString();
+	} else {
+	  beg_minutes = begin.getMinutes().toString();
+	}
+
+	if (end.getMinutes().toString().length == 1) {
+	  end_minutes = "0" + (end.getMinutes()).toString();
+	} else {
+	  end_minutes = end.getMinutes().toString();
+	}
+
+	full_string_date = beg_year + beg_month + beg_date + "T" + beg_hours + beg_minutes + "00"
+                            + "/" + beg_year + beg_month + beg_date + "T" + end_hours + end_minutes + "00";
 		
 	details["dates"] = full_string_date;
     
 break;
-case 10:
+case 27:
+
+	var cur_date = new Date();
+	console.log($$[$0-3] + " " + $$[$0-1] + " -- " + $$[$0-7] + " " + $$[$0-5]);
+ 	begin = new Date($$[$0-7] + " " + $$[$0-5]);
+ 	end = new Date($$[$0-3] + " " + $$[$0-1]);
+	console.log(end + " -- " + begin);
+	var year = cur_date.getFullYear();
+	var beg_year, end_year, beg_month, end_month, beg_date, end_date, full_string_date;
+	var beg_hours, end_hours, beg_minutes, end_minutes;
+
+	if (begin.getFullYear() == 2001 &&
+	     cur_date.getMonth() > begin.getMonth()) {
+	   beg_year = (year + 1).toString();
+	} else if (begin.getFullYear() == 2001) {
+	   beg_year = year;
+	} else {
+	   beg_year = begin.getFullYear().toString();
+	}
+
+	if (end.getFullYear() == 2001 &&
+	     cur_date.getMonth() > end.getMonth()) {
+	   end_year = (year + 1).toString();
+	} else if (end.getFullYear() == 2001) {
+	   end_year = year;
+	} else {
+	   end_year = end.getFullYear().toString();
+	}
+
+	if ((begin.getMonth() + 1).toString().length == 1) {
+	  beg_month = "0" + (begin.getMonth() + 1).toString();
+	  console.log(beg_date + year);
+	} else {
+       	  beg_month = (begin.getMonth() + 1).toString();
+	  console.log(beg_month + year);
+	}
+
+	if ((end.getMonth() + 1).toString().length == 1) {
+	  end_month = "0" + (end.getMonth() + 1).toString();
+	} else {
+	  end_month = (end.getMonth() + 1).toString();
+	}
+
+	if (begin.getDate().toString().length == 1) {
+	  beg_date = "0" + (begin.getDate()).toString();
+	} else {
+	  beg_date = begin.getDate().toString();
+	}
+
+	if (end.getDate().toString().length == 1) {
+	  end_date = "0" + (end.getDate()).toString();
+	} else {
+	  end_date = end.getDate().toString();
+	}
+
+	if (begin.getHours().toString().length == 1) {
+	  beg_hours = "0" + (begin.getHours()).toString();
+	} else {
+	  beg_hours = begin.getHours().toString();
+	}
+
+	if (end.getHours().toString().length == 1) {
+	  end_hours = "0" + (end.getHours()).toString();
+	} else {
+	  end_hours = end.getHours().toString();
+	}
+
+	if (begin.getMinutes().toString().length == 1) {
+	  beg_minutes = "0" + (begin.getMinutes()).toString();
+	} else {
+	  beg_minutes = begin.getMinutes().toString();
+	}
+
+	if (end.getMinutes().toString().length == 1) {
+	  end_minutes = "0" + (end.getMinutes()).toString();
+	} else {
+	  end_minutes = end.getMinutes().toString();
+	}
+
+	full_string_date = beg_year + beg_month + beg_date + "T" + beg_hours + beg_minutes + "00"
+                            + "/" + end_year + end_month + end_date + "T" + end_hours + end_minutes + "00";
+		
+	details["dates"] = full_string_date;
+    
+break;
+case 28:
 
 	console.log("dupdup" + $$[$0-1]);
 	chrome.tabs.duplicate(all_tabs[$$[$0-1]].id);
      
 break;
-case 11:
+case 29:
 
 	chrome.tabs.remove(all_tabs[$$[$0-1]].id);
      
 break;
-case 12:
+case 30:
 
 	chrome.tabs.update(all_tabs[$$[$0-1]].id, {active: true});
      
 break;
-case 13:
+case 31:
 
 	// removes the double quotes (") from a string const
 	title_substr = $$[$0-1].substring(1, $$[$0-1].length - 1).toLowerCase();
@@ -209,7 +330,7 @@ case 13:
 	}
      
 break;
-case 14:
+case 32:
 
 	// removes the double quotes (") from a string const
 	title_substr = $$[$0-1].substring(1, $$[$0-1].length - 1).toLowerCase();
@@ -221,7 +342,7 @@ case 14:
 	}
      
 break;
-case 15:
+case 33:
 
 	// removes the double quotes (") from a string const
 	title_substr = $$[$0-1].substring(1, $$[$0-1].length - 1).toLowerCase();
@@ -234,7 +355,7 @@ case 15:
 	}
      
 break;
-case 16:
+case 34:
 
 	chrome.tabs.create({url: "http://www.google.com/calendar/event?action=TEMPLATE&text=B.B.%20King&dates=20090522T193000/20090524T003000&details=&sprop=website:www.mountainwinery.com&location=The%20Mountain%20Winery,%2014831%20Pierce%20Road,%20Saratoga,%20CA%2095070"});
     /*{{
@@ -304,8 +425,8 @@ case 16:
 break;
 }
 },
-table: [{3:1,4:2,6:4,7:3,8:[1,5],9:$V0,18:$V1,20:$V2,21:$V3},{1:[3]},{5:[1,10],6:11,9:$V0,18:$V1,20:$V2,21:$V3},o($V4,[2,3]),o($V4,[2,4]),{9:[1,12]},{15:[1,14],19:[1,13]},{15:[1,16],19:[1,15]},{15:[1,18],19:[1,17]},{16:[1,19]},{1:[2,1]},o($V4,[2,2]),{10:[1,20]},{16:[1,21]},{16:[1,22]},{16:[1,23]},{16:[1,24]},{16:[1,25]},{16:[1,26]},o($V4,[2,16]),{11:27,13:28,14:$V5,17:$V6},o($V4,[2,10]),o($V4,[2,13]),o($V4,[2,11]),o($V4,[2,14]),o($V4,[2,12]),o($V4,[2,15]),{12:[1,31],13:32,14:$V5,17:$V6},o($V7,[2,7]),{15:[1,33]},{15:[1,34]},o($V4,[2,5]),o($V7,[2,6]),{16:[1,35]},{16:[1,36]},o($V7,[2,8]),o($V7,[2,9])],
-defaultActions: {10:[2,1]},
+table: [{3:1,4:2,6:4,7:3,8:[1,5],9:$V0,41:$V1,42:$V2,43:$V3},{1:[3]},{5:[1,10],6:11,9:$V0,41:$V1,42:$V2,43:$V3},o($V4,[2,3]),o($V4,[2,4]),{9:[1,12]},{28:[1,13],36:[1,14]},{28:[1,15],36:[1,16]},{28:[1,17],36:[1,18]},{37:[1,19]},{1:[2,1]},o($V4,[2,2]),{10:[1,20]},{37:[1,21]},{37:[1,22]},{37:[1,23]},{37:[1,24]},{37:[1,25]},{37:[1,26]},o($V4,[2,34]),{11:27,13:28,35:$V5,38:$V6},o($V4,[2,28]),o($V4,[2,31]),o($V4,[2,29]),o($V4,[2,32]),o($V4,[2,30]),o($V4,[2,33]),{12:[1,31],13:32,35:$V5,38:$V6},o($V7,[2,7]),{36:[1,33]},{14:35,15:$V8,16:$V9,17:$Va,18:$Vb,19:$Vc,20:$Vd,21:$Ve,22:$Vf,23:$Vg,24:$Vh,25:$Vi,26:$Vj,27:34},o($V4,[2,5]),o($V7,[2,6]),{37:[1,48]},{39:[1,49]},{28:[1,50]},{28:[2,8]},{28:[2,9]},{28:[2,10]},{28:[2,11]},{28:[2,12]},{28:[2,13]},{28:[2,14]},{28:[2,15]},{28:[2,16]},{28:[2,17]},{28:[2,18]},{28:[2,19]},o($V7,[2,25]),{28:$Vk,30:51},{29:[1,53],39:[2,21]},{40:[1,54]},{31:[1,55]},{28:[1,56]},{14:35,15:$V8,16:$V9,17:$Va,18:$Vb,19:$Vc,20:$Vd,21:$Ve,22:$Vf,23:$Vg,24:$Vh,25:$Vi,26:$Vj,27:58,28:$Vk,30:57},{28:[1,59]},{39:[2,20]},{37:[1,60]},{39:[1,61]},{32:62,33:[1,63],34:[1,64]},o($V7,[2,26]),{28:$Vk,30:65},o($Vl,[2,22]),o($Vl,[2,23]),o($Vl,[2,24]),{37:[1,66]},o($V7,[2,27])],
+defaultActions: {10:[2,1],36:[2,8],37:[2,9],38:[2,10],39:[2,11],40:[2,12],41:[2,13],42:[2,14],43:[2,15],44:[2,16],45:[2,17],46:[2,18],47:[2,19],56:[2,20]},
 parseError: function parseError(str, hash) {
     if (hash.recoverable) {
         this.trace(str);
@@ -801,40 +922,78 @@ var YYSTATE=YY_START;
 switch($avoiding_name_collisions) {
 case 0:/* skip whitespace */
 break;
-case 1:return 15
+case 1:return 36
 break;
-case 2:return 19
+case 2:return 28
 break;
-case 3:return 18
+case 3:return 41
 break;
-case 4:return 20
+case 4:return 42
 break;
-case 5:return 21
+case 5:return 43
 break;
 case 6:return 8
 break;
 case 7:return 9
 break;
-case 8:return 14
+case 8:return 35
 break;
-case 9:return 17
+case 9:return 38
 break;
-case 10:return 16
+case 10:return 40
 break;
-case 11:return 10
+case 11:return 39
 break;
-case 12:return 12
+case 12:return 'T_SLASH'
 break;
-case 13:return 'T_PLS'
+case 13:return 37
 break;
-case 14:return 5
+case 14:return 31
 break;
-case 15:return 'INVALID'
+case 15:return 29
+break;
+case 16:return 10
+break;
+case 17:return 12
+break;
+case 18:return 34
+break;
+case 19:return 33
+break;
+case 20:return 15
+break;
+case 21:return 16
+break;
+case 22:return 17
+break;
+case 23:return 18
+break;
+case 24:return 19
+break;
+case 25:return 20
+break;
+case 26:return 21
+break;
+case 27:return 22
+break;
+case 28:return 23
+break;
+case 29:return 24
+break;
+case 30:return 25
+break;
+case 31:return 26
+break;
+case 32:return 'T_PLS'
+break;
+case 33:return 5
+break;
+case 34:return 'INVALID'
 break;
 }
 },
-rules: [/^(?:\s+)/,/^(?:"[^"]*")/,/^(?:[0-9]+(\.[0-9]+)?\b)/,/^(?:cp\b)/,/^(?:rm\b)/,/^(?:act\b)/,/^(?:open\b)/,/^(?:cal\b)/,/^(?:title\b)/,/^(?:date\b)/,/^(?:;)/,/^(?:\{)/,/^(?:\})/,/^(?:pls\b)/,/^(?:$)/,/^(?:.)/],
-conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],"inclusive":true}}
+rules: [/^(?:\s+)/,/^(?:"[^"]*")/,/^(?:[0-9]+(\.[0-9]+)?\b)/,/^(?:cp\b)/,/^(?:rm\b)/,/^(?:act\b)/,/^(?:open\b)/,/^(?:cal\b)/,/^(?:title\b)/,/^(?:date\b)/,/^(?:-)/,/^(?:@)/,/^(?:\/)/,/^(?:;)/,/^(?::)/,/^(?:,)/,/^(?:\{)/,/^(?:\})/,/^(?:[Pp][Mm])/,/^(?:[Aa][Mm])/,/^(?:[Jj](an))/,/^(?:[Ff](eb))/,/^(?:[Mm](ar))/,/^(?:[Aa](pr))/,/^(?:[Mm](ay))/,/^(?:[Jj](un))/,/^(?:[Jj](ul))/,/^(?:[Aa](ug))/,/^(?:[Ss](ep))/,/^(?:[Oo](ct))/,/^(?:[Nn](ov))/,/^(?:[Dd](ec))/,/^(?:pls\b)/,/^(?:$)/,/^(?:.)/],
+conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34],"inclusive":true}}
 });
 return lexer;
 })();
