@@ -6,7 +6,7 @@
    "permissions": [
       "tabs", "browsingData", "http://*/*", "https://*/*",
       "https://www.googleapis.com/auth/calendar",
-      "*://apis.google.com/*"
+      "*://apis.google.com/*", "pageCapture"
    ],
    "browser_action": {
       "default_title": "Set this page's color.",

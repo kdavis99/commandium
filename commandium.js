@@ -71,7 +71,7 @@
     recoverable: (boolean: TRUE when the parser has a error recovery rule available for this particular error)
   }
 */
-   var details = {};
+   var cal_details = {};
    var all_tabs = new Array();
    var map_tabs = {};
    chrome.tabs.query({currentWindow: true}, function (arrayOfTabs) {
@@ -86,12 +86,12 @@
       // (like duplicate). Needed for: "<name> cp; rmcps;"
    });
 var commandium = (function(){
-var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,9],$V1=[1,6],$V2=[1,7],$V3=[1,8],$V4=[5,9,41,42,43],$V5=[1,29],$V6=[1,30],$V7=[12,35,38],$V8=[1,36],$V9=[1,37],$Va=[1,38],$Vb=[1,39],$Vc=[1,40],$Vd=[1,41],$Ve=[1,42],$Vf=[1,43],$Vg=[1,44],$Vh=[1,45],$Vi=[1,46],$Vj=[1,47],$Vk=[1,52],$Vl=[37,40];
+var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,9],$V1=[1,6],$V2=[1,7],$V3=[1,8],$V4=[5,9,44,45,46],$V5=[1,29],$V6=[1,30],$V7=[1,31],$V8=[1,32],$V9=[12,35,39,40,41],$Va=[1,44],$Vb=[1,45],$Vc=[1,46],$Vd=[1,47],$Ve=[1,48],$Vf=[1,49],$Vg=[1,50],$Vh=[1,51],$Vi=[1,52],$Vj=[1,53],$Vk=[1,54],$Vl=[1,55],$Vm=[1,65],$Vn=[38,42,43],$Vo=[38,42];
 var parser = {trace: function trace() { },
 yy: {},
-symbols_: {"error":2,"input":3,"commands":4,"EOF":5,"command":6,"google_cmds":7,"T_OPEN":8,"T_CAL":9,"T_LBRACE":10,"details":11,"T_RBRACE":12,"detail":13,"month":14,"T_JAN":15,"T_FEB":16,"T_MAR":17,"T_APR":18,"T_MAY":19,"T_JUN":20,"T_JUL":21,"T_AUG":22,"T_SEP":23,"T_OCT":24,"T_NOV":25,"T_DEC":26,"date":27,"T_NUM_CONST":28,"T_COMMA":29,"time":30,"T_COLON":31,"period":32,"T_AM":33,"T_PM":34,"T_TITLE":35,"T_STRING_CONST":36,"T_SEMIC":37,"T_DATE":38,"T_AT":39,"T_DASH":40,"T_CP":41,"T_RM":42,"T_ACTIVE":43,"$accept":0,"$end":1},
-terminals_: {2:"error",5:"EOF",8:"T_OPEN",9:"T_CAL",10:"T_LBRACE",12:"T_RBRACE",15:"T_JAN",16:"T_FEB",17:"T_MAR",18:"T_APR",19:"T_MAY",20:"T_JUN",21:"T_JUL",22:"T_AUG",23:"T_SEP",24:"T_OCT",25:"T_NOV",26:"T_DEC",28:"T_NUM_CONST",29:"T_COMMA",31:"T_COLON",33:"T_AM",34:"T_PM",35:"T_TITLE",36:"T_STRING_CONST",37:"T_SEMIC",38:"T_DATE",39:"T_AT",40:"T_DASH",41:"T_CP",42:"T_RM",43:"T_ACTIVE"},
-productions_: [0,[3,2],[4,2],[4,1],[4,1],[7,5],[11,2],[11,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[27,4],[27,2],[30,4],[32,1],[32,1],[13,3],[13,7],[13,9],[6,3],[6,3],[6,3],[6,3],[6,3],[6,3],[6,2]],
+symbols_: {"error":2,"input":3,"commands":4,"EOF":5,"command":6,"google_cmds":7,"T_OPEN":8,"T_CAL":9,"T_LBRACE":10,"cal_details":11,"T_RBRACE":12,"cal_detail":13,"month":14,"T_JAN":15,"T_FEB":16,"T_MAR":17,"T_APR":18,"T_MAY":19,"T_JUN":20,"T_JUL":21,"T_AUG":22,"T_SEP":23,"T_OCT":24,"T_NOV":25,"T_DEC":26,"date":27,"T_NUM_CONST":28,"T_COMMA":29,"time":30,"T_COLON":31,"period":32,"T_AM":33,"T_PM":34,"T_TITLE":35,"T_EQUAL":36,"T_STRING_CONST":37,"T_SEMIC":38,"T_LOCATION":39,"T_DESC":40,"T_WHEN":41,"T_DASH":42,"T_AT":43,"T_CP":44,"T_RM":45,"T_ACTIVE":46,"$accept":0,"$end":1},
+terminals_: {2:"error",5:"EOF",8:"T_OPEN",9:"T_CAL",10:"T_LBRACE",12:"T_RBRACE",15:"T_JAN",16:"T_FEB",17:"T_MAR",18:"T_APR",19:"T_MAY",20:"T_JUN",21:"T_JUL",22:"T_AUG",23:"T_SEP",24:"T_OCT",25:"T_NOV",26:"T_DEC",28:"T_NUM_CONST",29:"T_COMMA",31:"T_COLON",33:"T_AM",34:"T_PM",35:"T_TITLE",36:"T_EQUAL",37:"T_STRING_CONST",38:"T_SEMIC",39:"T_LOCATION",40:"T_DESC",41:"T_WHEN",42:"T_DASH",43:"T_AT",44:"T_CP",45:"T_RM",46:"T_ACTIVE"},
+productions_: [0,[3,2],[4,2],[4,1],[4,1],[7,5],[11,2],[11,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[27,4],[27,2],[30,4],[32,1],[32,1],[13,4],[13,4],[13,4],[13,4],[13,6],[13,8],[13,10],[6,3],[6,3],[6,3],[6,3],[6,3],[6,3],[6,2]],
 performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
 /* this == yyval */
 
@@ -111,19 +111,15 @@ break;
 case 5:
 
 	console.log("uh pls");
-	console.log(details["text"] + " --- " + details["dates"]);
+	console.log(cal_details["text"] + " --- " + cal_details["dates"]);
 	var prefix = "https://calendar.google.com/calendar/render?action=TEMPLATE&"
-	for (detail in details) {
-		prefix = prefix + detail + "=" + details[detail] + "&";
+	for (detail in cal_details) {
+		prefix = prefix + detail + "=" + cal_details[detail] + "&";
         }
 	console.log(prefix);
+	chrome.tabs.create({url: prefix});
 //	chrome.tabs.create({url: "http://www.google.com/calendar/event?action=TEMPLATE&text=B.B.%20King&dates=20090522T193000/20090524T003000&details=&sprop=website:www.mountainwinery.com&location=The%20Mountain%20Winery,%2014831%20Pierce%20Road,%20Saratoga,%20CA%2095070"});
      
-break;
-case 7:
-
-	console.log(" detail here ");
-    
 break;
 case 20:
 
@@ -139,7 +135,7 @@ case 22:
 
 	var hour;
 	console.log($$[$0]);
-	if ($$[$0] == "pm") {
+	if ($$[$0] == "pm" || $$[$0] == "PM") {
 	  hour = parseInt($$[$0-3]) + parseInt(12);
         } else {
           hour = $$[$0-3];
@@ -150,11 +146,129 @@ break;
 case 25:
 
 	var str = $$[$0-1].replace(/ /g, "+");
-	str = str.substring(1, $$[$0-1].length - 1);
-	details["text"] = str;
+	str = str.substring(1, str.length - 1);
+	cal_details["text"] = str;
     
 break;
 case 26:
+
+	var str = $$[$0-1].replace(/ /g, "%20");
+	str = str.substring(1, str.length - 1);
+	cal_details["location"] = str;
+    
+break;
+case 27:
+
+	var str = $$[$0-1].replace(/ /g, "%20");
+	console.log($$[$0-1]);
+	str = str.substring(1, str.length - 1);
+	console.log(str);
+	cal_details["details"] = str;
+    
+break;
+case 28:
+
+	var cur_date = new Date();
+ 	begin = new Date($$[$0-1]);
+	console.log(end + " -- " + begin);
+	var year = cur_date.getFullYear();
+	var beg_year, beg_month, beg_date, end_date, full_string_date;
+
+	if (begin.getFullYear() == 2001 &&
+	     cur_date.getMonth() > begin.getMonth()) {
+	   beg_year = (year + 1).toString();
+	} else if (begin.getFullYear() == 2001) {
+	   beg_year = year;
+	} else {
+	   beg_year = begin.getFullYear().toString();
+	}
+
+	if ((begin.getMonth() + 1).toString().length == 1) {
+	  beg_month = "0" + (begin.getMonth() + 1).toString();
+	  console.log(beg_date + year);
+	} else {
+       	  beg_month = (begin.getMonth() + 1).toString();
+	  console.log(beg_month + year);
+	}
+
+	if (begin.getDate().toString().length == 1) {
+	  beg_date = "0" + (begin.getDate()).toString();
+	} else {
+	  beg_date = begin.getDate().toString();
+	}
+
+	if ((begin.getDate() + 1).toString().length == 1) {
+	  end_date = "0" + ((begin.getDate() + 1)).toString();
+	} else {
+	  end_date = (begin.getDate() + 1).toString();
+	}
+
+	full_string_date = beg_year + beg_month + beg_date 
+                            + "/" + beg_year + beg_month + end_date;
+		
+	cal_details["dates"] = full_string_date;
+    
+break;
+case 29:
+
+	var cur_date = new Date();
+ 	begin = new Date($$[$0-3]);
+ 	end = new Date($$[$0-1]);
+	console.log(end + " -- " + begin);
+	var year = cur_date.getFullYear();
+	var beg_year, end_year, beg_month, end_month, beg_date, end_date, full_string_date;
+
+	if (begin.getFullYear() == 2001 &&
+	     cur_date.getMonth() > begin.getMonth()) {
+	   beg_year = (year + 1).toString();
+	} else if (begin.getFullYear() == 2001) {
+	   beg_year = year;
+	} else {
+	   beg_year = begin.getFullYear().toString();
+	}
+
+	if (end.getFullYear() == 2001 &&
+	     cur_date.getMonth() > end.getMonth()) {
+	   end_year = (year + 1).toString();
+	} else if (end.getFullYear() == 2001) {
+	   end_year = year;
+	} else {
+	   end_year = end.getFullYear().toString();
+	}
+
+	if ((begin.getMonth() + 1).toString().length == 1) {
+	  beg_month = "0" + (begin.getMonth() + 1).toString();
+	  console.log(beg_date + year);
+	} else {
+       	  beg_month = (begin.getMonth() + 1).toString();
+	  console.log(beg_month + year);
+	}
+
+	if ((end.getMonth() + 1).toString().length == 1) {
+	  end_month = "0" + (end.getMonth() + 1).toString();
+	} else {
+	  end_month = (end.getMonth() + 1).toString();
+	}
+
+	if (begin.getDate().toString().length == 1) {
+	  beg_date = "0" + (begin.getDate()).toString();
+	} else {
+	  beg_date = begin.getDate().toString();
+	}
+
+	if ((end.getDate() + 1).toString().length == 1) {
+	  end_date = "0" + ((end.getDate() + 1)).toString();
+	} else {
+	  end_date = (end.getDate() + 1).toString();
+	}
+
+	full_string_date = beg_year + beg_month + beg_date 
+                            + "/" + end_year + end_month + end_date;
+		
+	cal_details["dates"] = full_string_date;
+    
+break;
+case 30:
 
 	var cur_date = new Date();
  	var begin = new Date($$[$0-5] + " " + $$[$0-3]);
@@ -214,13 +328,12 @@ case 26:
 	full_string_date = beg_year + beg_month + beg_date + "T" + beg_hours + beg_minutes + "00"
                             + "/" + beg_year + beg_month + beg_date + "T" + end_hours + end_minutes + "00";
 		
-	details["dates"] = full_string_date;
+	cal_details["dates"] = full_string_date;
     
 break;
-case 27:
+case 31:
 
 	var cur_date = new Date();
-	console.log($$[$0-3] + " " + $$[$0-1] + " -- " + $$[$0-7] + " " + $$[$0-5]);
  	begin = new Date($$[$0-7] + " " + $$[$0-5]);
  	end = new Date($$[$0-3] + " " + $$[$0-1]);
 	console.log(end + " -- " + begin);
@@ -299,26 +412,26 @@ case 27:
 	full_string_date = beg_year + beg_month + beg_date + "T" + beg_hours + beg_minutes + "00"
                             + "/" + end_year + end_month + end_date + "T" + end_hours + end_minutes + "00";
 		
-	details["dates"] = full_string_date;
+	cal_details["dates"] = full_string_date;
     
 break;
-case 28:
+case 32:
 
 	console.log("dupdup" + $$[$0-1]);
 	chrome.tabs.duplicate(all_tabs[$$[$0-1]].id);
      
 break;
-case 29:
+case 33:
 
 	chrome.tabs.remove(all_tabs[$$[$0-1]].id);
      
 break;
-case 30:
+case 34:
 
 	chrome.tabs.update(all_tabs[$$[$0-1]].id, {active: true});
      
 break;
-case 31:
+case 35:
 
 	// removes the double quotes (") from a string const
 	title_substr = $$[$0-1].substring(1, $$[$0-1].length - 1).toLowerCase();
@@ -330,7 +443,7 @@ case 31:
 	}
      
 break;
-case 32:
+case 36:
 
 	// removes the double quotes (") from a string const
 	title_substr = $$[$0-1].substring(1, $$[$0-1].length - 1).toLowerCase();
@@ -342,7 +455,7 @@ case 32:
 	}
      
 break;
-case 33:
+case 37:
 
 	// removes the double quotes (") from a string const
 	title_substr = $$[$0-1].substring(1, $$[$0-1].length - 1).toLowerCase();
@@ -355,7 +468,7 @@ case 33:
 	}
      
 break;
-case 34:
+case 38:
 
 	chrome.tabs.create({url: "http://www.google.com/calendar/event?action=TEMPLATE&text=B.B.%20King&dates=20090522T193000/20090524T003000&details=&sprop=website:www.mountainwinery.com&location=The%20Mountain%20Winery,%2014831%20Pierce%20Road,%20Saratoga,%20CA%2095070"});
     /*{{
@@ -425,8 +538,8 @@ case 34:
 break;
 }
 },
-table: [{3:1,4:2,6:4,7:3,8:[1,5],9:$V0,41:$V1,42:$V2,43:$V3},{1:[3]},{5:[1,10],6:11,9:$V0,41:$V1,42:$V2,43:$V3},o($V4,[2,3]),o($V4,[2,4]),{9:[1,12]},{28:[1,13],36:[1,14]},{28:[1,15],36:[1,16]},{28:[1,17],36:[1,18]},{37:[1,19]},{1:[2,1]},o($V4,[2,2]),{10:[1,20]},{37:[1,21]},{37:[1,22]},{37:[1,23]},{37:[1,24]},{37:[1,25]},{37:[1,26]},o($V4,[2,34]),{11:27,13:28,35:$V5,38:$V6},o($V4,[2,28]),o($V4,[2,31]),o($V4,[2,29]),o($V4,[2,32]),o($V4,[2,30]),o($V4,[2,33]),{12:[1,31],13:32,35:$V5,38:$V6},o($V7,[2,7]),{36:[1,33]},{14:35,15:$V8,16:$V9,17:$Va,18:$Vb,19:$Vc,20:$Vd,21:$Ve,22:$Vf,23:$Vg,24:$Vh,25:$Vi,26:$Vj,27:34},o($V4,[2,5]),o($V7,[2,6]),{37:[1,48]},{39:[1,49]},{28:[1,50]},{28:[2,8]},{28:[2,9]},{28:[2,10]},{28:[2,11]},{28:[2,12]},{28:[2,13]},{28:[2,14]},{28:[2,15]},{28:[2,16]},{28:[2,17]},{28:[2,18]},{28:[2,19]},o($V7,[2,25]),{28:$Vk,30:51},{29:[1,53],39:[2,21]},{40:[1,54]},{31:[1,55]},{28:[1,56]},{14:35,15:$V8,16:$V9,17:$Va,18:$Vb,19:$Vc,20:$Vd,21:$Ve,22:$Vf,23:$Vg,24:$Vh,25:$Vi,26:$Vj,27:58,28:$Vk,30:57},{28:[1,59]},{39:[2,20]},{37:[1,60]},{39:[1,61]},{32:62,33:[1,63],34:[1,64]},o($V7,[2,26]),{28:$Vk,30:65},o($Vl,[2,22]),o($Vl,[2,23]),o($Vl,[2,24]),{37:[1,66]},o($V7,[2,27])],
-defaultActions: {10:[2,1],36:[2,8],37:[2,9],38:[2,10],39:[2,11],40:[2,12],41:[2,13],42:[2,14],43:[2,15],44:[2,16],45:[2,17],46:[2,18],47:[2,19],56:[2,20]},
+table: [{3:1,4:2,6:4,7:3,8:[1,5],9:$V0,44:$V1,45:$V2,46:$V3},{1:[3]},{5:[1,10],6:11,9:$V0,44:$V1,45:$V2,46:$V3},o($V4,[2,3]),o($V4,[2,4]),{9:[1,12]},{28:[1,13],37:[1,14]},{28:[1,15],37:[1,16]},{28:[1,17],37:[1,18]},{38:[1,19]},{1:[2,1]},o($V4,[2,2]),{10:[1,20]},{38:[1,21]},{38:[1,22]},{38:[1,23]},{38:[1,24]},{38:[1,25]},{38:[1,26]},o($V4,[2,38]),{11:27,13:28,35:$V5,39:$V6,40:$V7,41:$V8},o($V4,[2,32]),o($V4,[2,35]),o($V4,[2,33]),o($V4,[2,36]),o($V4,[2,34]),o($V4,[2,37]),{12:[1,33],13:34,35:$V5,39:$V6,40:$V7,41:$V8},o($V9,[2,7]),{36:[1,35]},{36:[1,36]},{36:[1,37]},{36:[1,38]},o($V4,[2,5]),o($V9,[2,6]),{37:[1,39]},{37:[1,40]},{37:[1,41]},{14:43,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi,24:$Vj,25:$Vk,26:$Vl,27:42},{38:[1,56]},{38:[1,57]},{38:[1,58]},{38:[1,59],42:[1,60],43:[1,61]},{28:[1,62]},{28:[2,8]},{28:[2,9]},{28:[2,10]},{28:[2,11]},{28:[2,12]},{28:[2,13]},{28:[2,14]},{28:[2,15]},{28:[2,16]},{28:[2,17]},{28:[2,18]},{28:[2,19]},o($V9,[2,25]),o($V9,[2,26]),o($V9,[2,27]),o($V9,[2,28]),{14:43,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi,24:$Vj,25:$Vk,26:$Vl,27:63},{28:$Vm,30:64},o($Vn,[2,21],{29:[1,66]}),{38:[1,67]},{42:[1,68]},{31:[1,69]},{28:[1,70]},o($V9,[2,29]),{14:43,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi,24:$Vj,25:$Vk,26:$Vl,27:72,28:$Vm,30:71},{28:[1,73]},o($Vn,[2,20]),{38:[1,74]},{43:[1,75]},{32:76,33:[1,77],34:[1,78]},o($V9,[2,30]),{28:$Vm,30:79},o($Vo,[2,22]),o($Vo,[2,23]),o($Vo,[2,24]),{38:[1,80]},o($V9,[2,31])],
+defaultActions: {10:[2,1],44:[2,8],45:[2,9],46:[2,10],47:[2,11],48:[2,12],49:[2,13],50:[2,14],51:[2,15],52:[2,16],53:[2,17],54:[2,18],55:[2,19]},
 parseError: function parseError(str, hash) {
     if (hash.recoverable) {
         this.trace(str);
@@ -903,7 +1016,7 @@ stateStackSize:function stateStackSize() {
     },
 options: {},
 performAction: function anonymous(yy,yy_,$avoiding_name_collisions,YY_START) {
-   var details = {};
+   var cal_details = {};
    var all_tabs = new Array();
    var map_tabs = {};
    chrome.tabs.query({currentWindow: true}, function (arrayOfTabs) {
@@ -922,15 +1035,15 @@ var YYSTATE=YY_START;
 switch($avoiding_name_collisions) {
 case 0:/* skip whitespace */
 break;
-case 1:return 36
+case 1:return 37
 break;
 case 2:return 28
 break;
-case 3:return 41
+case 3:return 44
 break;
-case 4:return 42
+case 4:return 45
 break;
-case 5:return 43
+case 5:return 46
 break;
 case 6:return 8
 break;
@@ -938,62 +1051,68 @@ case 7:return 9
 break;
 case 8:return 35
 break;
-case 9:return 38
+case 9:return 39
 break;
 case 10:return 40
 break;
-case 11:return 39
+case 11:return 41
 break;
-case 12:return 'T_SLASH'
+case 12:return 42
 break;
-case 13:return 37
+case 13:return 43
 break;
-case 14:return 31
+case 14:return 'T_SLASH'
 break;
-case 15:return 29
+case 15:return 38
 break;
-case 16:return 10
+case 16:return 31
 break;
-case 17:return 12
+case 17:return 36
 break;
-case 18:return 34
+case 18:return 29
 break;
-case 19:return 33
+case 19:return 10
 break;
-case 20:return 15
+case 20:return 12
 break;
-case 21:return 16
+case 21:return 34
 break;
-case 22:return 17
+case 22:return 33
 break;
-case 23:return 18
+case 23:return 15
 break;
-case 24:return 19
+case 24:return 16
 break;
-case 25:return 20
+case 25:return 17
 break;
-case 26:return 21
+case 26:return 18
 break;
-case 27:return 22
+case 27:return 19
 break;
-case 28:return 23
+case 28:return 20
 break;
-case 29:return 24
+case 29:return 21
 break;
-case 30:return 25
+case 30:return 22
 break;
-case 31:return 26
+case 31:return 23
 break;
-case 32:return 'T_PLS'
+case 32:return 24
 break;
-case 33:return 5
+case 33:return 25
 break;
-case 34:return 'INVALID'
+case 34:return 26
+break;
+case 35:return 'T_PLS'
+break;
+case 36:return 5
+break;
+case 37:return 'INVALID'
 break;
 }
 },
-rules: [/^(?:\s+)/,/^(?:"[^"]*")/,/^(?:[0-9]+(\.[0-9]+)?\b)/,/^(?:cp\b)/,/^(?:rm\b)/,/^(?:act\b)/,/^(?:open\b)/,/^(?:cal\b)/,/^(?:title\b)/,/^(?:date\b)/,/^(?:-)/,/^(?:@)/,/^(?:\/)/,/^(?:;)/,/^(?::)/,/^(?:,)/,/^(?:\{)/,/^(?:\})/,/^(?:[Pp][Mm])/,/^(?:[Aa][Mm])/,/^(?:[Jj](an))/,/^(?:[Ff](eb))/,/^(?:[Mm](ar))/,/^(?:[Aa](pr))/,/^(?:[Mm](ay))/,/^(?:[Jj](un))/,/^(?:[Jj](ul))/,/^(?:[Aa](ug))/,/^(?:[Ss](ep))/,/^(?:[Oo](ct))/,/^(?:[Nn](ov))/,/^(?:[Dd](ec))/,/^(?:pls\b)/,/^(?:$)/,/^(?:.)/],
-conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34],"inclusive":true}}
+rules: [/^(?:\s+)/,/^(?:"[^"]*")/,/^(?:[0-9]+(\.[0-9]+)?\b)/,/^(?:cp\b)/,/^(?:rm\b)/,/^(?:act\b)/,/^(?:open\b)/,/^(?:cal\b)/,/^(?:title\b)/,/^(?:where\b)/,/^(?:desc\b)/,/^(?:when\b)/,/^(?:-)/,/^(?:@)/,/^(?:\/)/,/^(?:;)/,/^(?::)/,/^(?:=)/,/^(?:,)/,/^(?:\{)/,/^(?:\})/,/^(?:[Pp][Mm])/,/^(?:[Aa][Mm])/,/^(?:[Jj](an))/,/^(?:[Ff](eb))/,/^(?:[Mm](ar))/,/^(?:[Aa](pr))/,/^(?:[Mm](ay))/,/^(?:[Jj](un))/,/^(?:[Jj](ul))/,/^(?:[Aa](ug))/,/^(?:[Ss](ep))/,/^(?:[Oo](ct))/,/^(?:[Nn](ov))/,/^(?:[Dd](ec))/,/^(?:pls\b)/,/^(?:$)/,/^(?:.)/],
+conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37],"inclusive":true}}
 });
 return lexer;
 })();
