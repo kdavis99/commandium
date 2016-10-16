@@ -34,6 +34,7 @@
 "where"		      return 'T_LOCATION'
 "desc"	      	      return 'T_DESC'
 "when"		      return 'T_WHEN'
+"page"		      return 'T_PAGE'
 "-"		      return 'T_DASH'
 "@"		      return 'T_AT'
 "/"		      return 'T_SLASH'
@@ -98,22 +99,6 @@ google_cmds
 //	chrome.tabs.create({url: "http://www.google.com/calendar/event?action=TEMPLATE&text=B.B.%20King&dates=20090522T193000/20090524T003000&details=&sprop=website:www.mountainwinery.com&location=The%20Mountain%20Winery,%2014831%20Pierce%20Road,%20Saratoga,%20CA%2095070"});
      }}
   ;
-
-cal_detail
-  : T_TITLE T_EQUAL T_STRING_CONST T_SEMIC
-    {{
-	var str = $3.replace(/ /g, "+");
-	str = str.substring(1, str.length - 1);
-	cal_details["text"] = str;
-    }}
-  | T_DESC T_EQUAL T_STRING_CONST T_SEMIC
-    {{
-	var str = $3.replace(/ /g, "%20");
-	console.log($3);
-	str = str.substring(1, str.length - 1);
-	console.log(str);
-	cal_details["details"] = str;
-    }}
 
 cal_details
   : cal_details cal_detail
@@ -434,7 +419,33 @@ cal_detail
   ;
 
 command
-  : T_CP T_NUM_CONST T_SEMIC 
+  : T_PAGE T_NUM_CONST T_SEMIC
+     {{
+	console.log("here");
+	console.log("before");
+	console.log(all_tabs[$2].id);
+	console.log(document.documentElement.outerHTML);
+	chrome.tabs.executeScript(all_tabs[$2].id, {code: "document.documentElement.outerHTML"},
+			function (result) {
+			   var prefix = "https://www.google.com/#q=";
+			   for (index in result) {
+			   var words = result[index].split(" ");
+				for (word in words) {
+				  if (words[word] == "recognition") {
+					//while (words[word] != "features") {
+					  // console.log(words[word]);
+					  //prefix = prefix + words[word] + "+";
+					  //word++;
+					//}
+					prefix = prefix + words[word];
+				  }
+				}
+			   }
+			   chrome.tabs.create({url: prefix});
+			});
+	console.log("here");
+     }}
+  | T_CP T_NUM_CONST T_SEMIC 
      {{
 	console.log("dupdup" + $2);
 	chrome.tabs.duplicate(all_tabs[$2].id);
@@ -484,68 +495,5 @@ command
  | T_CAL T_SEMIC// start_statement_block attributes end_statement_block
      {{
 	chrome.tabs.create({url: "http://www.google.com/calendar/event?action=TEMPLATE&text=B.B.%20King&dates=20090522T193000/20090524T003000&details=&sprop=website:www.mountainwinery.com&location=The%20Mountain%20Winery,%2014831%20Pierce%20Road,%20Saratoga,%20CA%2095070"});
-    /*{{
-      console.log("here");
-      var CLIENT_ID = "845539104760-0m42csibtm6949tt5ateme6n76m02n4i.apps.googleusercontent.com";
-      var SCOPES = ["https://www.googleapis.com/auth/calendar"];
-      function checkAuth() {
-        gapi.auth.authorize(
-          {
-            'client_id': CLIENT_ID,
-            'scope': SCOPES.join(' '),
-            'immediate': true
-          }, handleAuthResult);
-      }
-      function handleAuthClick(event) {
-        gapi.auth.authorize(
-          {client_id: CLIENT_ID, scope: SCOPES, immediate: false},
-          handleAuthResult);
-        return false;
-      }
-      function handleAuthResult(authResult) {
-        var authorizeDiv = document.getElementById('authorize-div');
-        if (authResult && !authResult.error) {
-          // Hide auth UI, then load client library.
-          authorizeDiv.style.display = 'none';
-          loadCalendarApi();
-        } else {
-          // Show auth UI, allowing the user to initiate authorization by
-          // clicking authorize button.
-          authorizeDiv.style.display = 'inline';
-        }
-      }*/
-
-/* var head = document.getElementsByTagName('head')[0];
- var script = document.createElement('script');
- script.type = 'text/javascript';
- script.src = "https://apis.google.com/js/client.js?onload=callbackFunction";
- head.appendChild(script);*/
-   /* function onLoadFn() {
-      console.log("in_log");
-      var event = {
-        'summary': "Google I/O 2015",
-        'location': "800 Howard St., San Francisco, CA 94103",
-        'description': "A chance to hear more about Google\'s developer products.",
-        'start': {
-           'dateTime': "2016-09-28T09:00:00-07:00",
-           'timeZone': "America/Los_Angeles"
-         },
-        'end': {
-          'dateTime': "2017-09-28T17:00:00-07:00",
-          'timeZone': "America/Los_Angeles"
-        },
-      };
-        var request = gapi.client.calendar.events.insert({
-          'calendarId': "primary",
-          'resource': event
-        });
-
-        request.execute(function(event) {
-          appendPre("Event created: " + event.htmlLink);
-        });
-        handleAuthClick(event);
-      }*/
-      //gapi.load("calendar", onLoadCal);
-      // gapi.load("client,calendar", onLoadFn);
     }}
     ;

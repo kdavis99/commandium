@@ -86,12 +86,12 @@
       // (like duplicate). Needed for: "<name> cp; rmcps;"
    });
 var commandium = (function(){
-var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,9],$V1=[1,6],$V2=[1,7],$V3=[1,8],$V4=[5,9,44,45,46],$V5=[1,29],$V6=[1,30],$V7=[1,31],$V8=[1,32],$V9=[12,35,39,40,41],$Va=[1,44],$Vb=[1,45],$Vc=[1,46],$Vd=[1,47],$Ve=[1,48],$Vf=[1,49],$Vg=[1,50],$Vh=[1,51],$Vi=[1,52],$Vj=[1,53],$Vk=[1,54],$Vl=[1,55],$Vm=[1,65],$Vn=[38,42,43],$Vo=[38,42];
+var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,9],$V1=[1,5],$V2=[1,6],$V3=[1,7],$V4=[1,8],$V5=[5,9,44,45,46,47],$V6=[1,32],$V7=[1,33],$V8=[1,34],$V9=[1,35],$Va=[12,35,39,40,41],$Vb=[1,47],$Vc=[1,48],$Vd=[1,49],$Ve=[1,50],$Vf=[1,51],$Vg=[1,52],$Vh=[1,53],$Vi=[1,54],$Vj=[1,55],$Vk=[1,56],$Vl=[1,57],$Vm=[1,58],$Vn=[1,68],$Vo=[38,42,43],$Vp=[38,42];
 var parser = {trace: function trace() { },
 yy: {},
-symbols_: {"error":2,"input":3,"commands":4,"EOF":5,"command":6,"google_cmds":7,"T_OPEN":8,"T_CAL":9,"T_LBRACE":10,"cal_details":11,"T_RBRACE":12,"cal_detail":13,"month":14,"T_JAN":15,"T_FEB":16,"T_MAR":17,"T_APR":18,"T_MAY":19,"T_JUN":20,"T_JUL":21,"T_AUG":22,"T_SEP":23,"T_OCT":24,"T_NOV":25,"T_DEC":26,"date":27,"T_NUM_CONST":28,"T_COMMA":29,"time":30,"T_COLON":31,"period":32,"T_AM":33,"T_PM":34,"T_TITLE":35,"T_EQUAL":36,"T_STRING_CONST":37,"T_SEMIC":38,"T_LOCATION":39,"T_DESC":40,"T_WHEN":41,"T_DASH":42,"T_AT":43,"T_CP":44,"T_RM":45,"T_ACTIVE":46,"$accept":0,"$end":1},
-terminals_: {2:"error",5:"EOF",8:"T_OPEN",9:"T_CAL",10:"T_LBRACE",12:"T_RBRACE",15:"T_JAN",16:"T_FEB",17:"T_MAR",18:"T_APR",19:"T_MAY",20:"T_JUN",21:"T_JUL",22:"T_AUG",23:"T_SEP",24:"T_OCT",25:"T_NOV",26:"T_DEC",28:"T_NUM_CONST",29:"T_COMMA",31:"T_COLON",33:"T_AM",34:"T_PM",35:"T_TITLE",36:"T_EQUAL",37:"T_STRING_CONST",38:"T_SEMIC",39:"T_LOCATION",40:"T_DESC",41:"T_WHEN",42:"T_DASH",43:"T_AT",44:"T_CP",45:"T_RM",46:"T_ACTIVE"},
-productions_: [0,[3,2],[4,2],[4,1],[4,1],[7,5],[11,2],[11,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[27,4],[27,2],[30,4],[32,1],[32,1],[13,4],[13,4],[13,4],[13,4],[13,6],[13,8],[13,10],[6,3],[6,3],[6,3],[6,3],[6,3],[6,3],[6,2]],
+symbols_: {"error":2,"input":3,"commands":4,"EOF":5,"command":6,"google_cmds":7,"T_OPEN":8,"T_CAL":9,"T_LBRACE":10,"cal_details":11,"T_RBRACE":12,"cal_detail":13,"month":14,"T_JAN":15,"T_FEB":16,"T_MAR":17,"T_APR":18,"T_MAY":19,"T_JUN":20,"T_JUL":21,"T_AUG":22,"T_SEP":23,"T_OCT":24,"T_NOV":25,"T_DEC":26,"date":27,"T_NUM_CONST":28,"T_COMMA":29,"time":30,"T_COLON":31,"period":32,"T_AM":33,"T_PM":34,"T_TITLE":35,"T_EQUAL":36,"T_STRING_CONST":37,"T_SEMIC":38,"T_LOCATION":39,"T_DESC":40,"T_WHEN":41,"T_DASH":42,"T_AT":43,"T_PAGE":44,"T_CP":45,"T_RM":46,"T_ACTIVE":47,"$accept":0,"$end":1},
+terminals_: {2:"error",5:"EOF",8:"T_OPEN",9:"T_CAL",10:"T_LBRACE",12:"T_RBRACE",15:"T_JAN",16:"T_FEB",17:"T_MAR",18:"T_APR",19:"T_MAY",20:"T_JUN",21:"T_JUL",22:"T_AUG",23:"T_SEP",24:"T_OCT",25:"T_NOV",26:"T_DEC",28:"T_NUM_CONST",29:"T_COMMA",31:"T_COLON",33:"T_AM",34:"T_PM",35:"T_TITLE",36:"T_EQUAL",37:"T_STRING_CONST",38:"T_SEMIC",39:"T_LOCATION",40:"T_DESC",41:"T_WHEN",42:"T_DASH",43:"T_AT",44:"T_PAGE",45:"T_CP",46:"T_RM",47:"T_ACTIVE"},
+productions_: [0,[3,2],[4,2],[4,1],[4,1],[7,5],[11,2],[11,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[27,4],[27,2],[30,4],[32,1],[32,1],[13,4],[13,4],[13,4],[13,4],[13,6],[13,8],[13,10],[6,3],[6,3],[6,3],[6,3],[6,3],[6,3],[6,3],[6,2]],
 performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
 /* this == yyval */
 
@@ -102,11 +102,6 @@ case 1:
        console.log("in");
        return $$[$0-1]; 
      
-break;
-case 3:
-
-       console.log("google");
-    
 break;
 case 5:
 
@@ -417,21 +412,64 @@ case 31:
 break;
 case 32:
 
-	console.log("dupdup" + $$[$0-1]);
-	chrome.tabs.duplicate(all_tabs[$$[$0-1]].id);
+	console.log("here");
+	console.log("before");
+	console.log(all_tabs[$$[$0-1]].id);
+	console.log(document.documentElement.outerHTML);
+	chrome.tabs.executeScript(all_tabs[$$[$0-1]].id, {code: "document.documentElement.outerHTML"},
+			function (result) {
+			   var prefix = "https://www.google.com/#q=";
+			   for (index in result) {
+			   var words = result[index].split(" ");
+				for (word in words) {
+				  if (words[word] == "recognition") {
+					//while (words[word] != "features") {
+					  // console.log(words[word]);
+					  //prefix = prefix + words[word] + "+";
+					  //word++;
+					//}
+					prefix = prefix + words[word];
+				  }
+				}
+			   }
+			   chrome.tabs.create({url: prefix});
+			});
+        /*chrome.pageCapture.saveAsMHTML({tabId: all_tabs[$$[$0-1]].id}, function (mhtml){
+		console.debug(mhtml + "pageCapture.saveAsMHTML(..) called");
+		console.log(mhtml);
+		console.log(mhtml.__proto__);
+		var arrayBuffer;
+		var fileReader = new FileReader();
+		fileReader.readAsArrayBuffer(mhtml);
+		    console.log(arrayBuffer);
+		fileReader.onload = function() {
+		    arrayBuffer = this.result;
+		};
+	}).call(this);*/
+// 	console.log(mhtml);
+	/*chrome.downloads.download({
+		url: all_tabs[$$[$0-1]].url
+        });*/
+	console.log("here");
      
 break;
 case 33:
 
-	chrome.tabs.remove(all_tabs[$$[$0-1]].id);
+	console.log("dupdup" + $$[$0-1]);
+	chrome.tabs.duplicate(all_tabs[$$[$0-1]].id);
      
 break;
 case 34:
 
-	chrome.tabs.update(all_tabs[$$[$0-1]].id, {active: true});
+	chrome.tabs.remove(all_tabs[$$[$0-1]].id);
      
 break;
 case 35:
+
+	chrome.tabs.update(all_tabs[$$[$0-1]].id, {active: true});
+     
+break;
+case 36:
 
 	// removes the double quotes (") from a string const
 	title_substr = $$[$0-1].substring(1, $$[$0-1].length - 1).toLowerCase();
@@ -443,7 +481,7 @@ case 35:
 	}
      
 break;
-case 36:
+case 37:
 
 	// removes the double quotes (") from a string const
 	title_substr = $$[$0-1].substring(1, $$[$0-1].length - 1).toLowerCase();
@@ -455,7 +493,7 @@ case 36:
 	}
      
 break;
-case 37:
+case 38:
 
 	// removes the double quotes (") from a string const
 	title_substr = $$[$0-1].substring(1, $$[$0-1].length - 1).toLowerCase();
@@ -468,78 +506,15 @@ case 37:
 	}
      
 break;
-case 38:
+case 39:
 
 	chrome.tabs.create({url: "http://www.google.com/calendar/event?action=TEMPLATE&text=B.B.%20King&dates=20090522T193000/20090524T003000&details=&sprop=website:www.mountainwinery.com&location=The%20Mountain%20Winery,%2014831%20Pierce%20Road,%20Saratoga,%20CA%2095070"});
-    /*{{
-      console.log("here");
-      var CLIENT_ID = "845539104760-0m42csibtm6949tt5ateme6n76m02n4i.apps.googleusercontent.com";
-      var SCOPES = ["https://www.googleapis.com/auth/calendar"];
-      function checkAuth() {
-        gapi.auth.authorize(
-          {
-            'client_id': CLIENT_ID,
-            'scope': SCOPES.join(' '),
-            'immediate': true
-          }, handleAuthResult);
-      }
-      function handleAuthClick(event) {
-        gapi.auth.authorize(
-          {client_id: CLIENT_ID, scope: SCOPES, immediate: false},
-          handleAuthResult);
-        return false;
-      }
-      function handleAuthResult(authResult) {
-        var authorizeDiv = document.getElementById('authorize-div');
-        if (authResult && !authResult.error) {
-          // Hide auth UI, then load client library.
-          authorizeDiv.style.display = 'none';
-          loadCalendarApi();
-        } else {
-          // Show auth UI, allowing the user to initiate authorization by
-          // clicking authorize button.
-          authorizeDiv.style.display = 'inline';
-        }
-      }*/
-
-/* var head = document.getElementsByTagName('head')[0];
- var script = document.createElement('script');
- script.type = 'text/javascript';
- script.src = "https://apis.google.com/js/client.js?onload=callbackFunction";
- head.appendChild(script);*/
-   /* function onLoadFn() {
-      console.log("in_log");
-      var event = {
-        'summary': "Google I/O 2015",
-        'location': "800 Howard St., San Francisco, CA 94103",
-        'description': "A chance to hear more about Google\'s developer products.",
-        'start': {
-           'dateTime': "2016-09-28T09:00:00-07:00",
-           'timeZone': "America/Los_Angeles"
-         },
-        'end': {
-          'dateTime': "2017-09-28T17:00:00-07:00",
-          'timeZone': "America/Los_Angeles"
-        },
-      };
-        var request = gapi.client.calendar.events.insert({
-          'calendarId': "primary",
-          'resource': event
-        });
-
-        request.execute(function(event) {
-          appendPre("Event created: " + event.htmlLink);
-        });
-        handleAuthClick(event);
-      }*/
-      //gapi.load("calendar", onLoadCal);
-      // gapi.load("client,calendar", onLoadFn);
     
 break;
 }
 },
-table: [{3:1,4:2,6:4,7:3,8:[1,5],9:$V0,44:$V1,45:$V2,46:$V3},{1:[3]},{5:[1,10],6:11,9:$V0,44:$V1,45:$V2,46:$V3},o($V4,[2,3]),o($V4,[2,4]),{9:[1,12]},{28:[1,13],37:[1,14]},{28:[1,15],37:[1,16]},{28:[1,17],37:[1,18]},{38:[1,19]},{1:[2,1]},o($V4,[2,2]),{10:[1,20]},{38:[1,21]},{38:[1,22]},{38:[1,23]},{38:[1,24]},{38:[1,25]},{38:[1,26]},o($V4,[2,38]),{11:27,13:28,35:$V5,39:$V6,40:$V7,41:$V8},o($V4,[2,32]),o($V4,[2,35]),o($V4,[2,33]),o($V4,[2,36]),o($V4,[2,34]),o($V4,[2,37]),{12:[1,33],13:34,35:$V5,39:$V6,40:$V7,41:$V8},o($V9,[2,7]),{36:[1,35]},{36:[1,36]},{36:[1,37]},{36:[1,38]},o($V4,[2,5]),o($V9,[2,6]),{37:[1,39]},{37:[1,40]},{37:[1,41]},{14:43,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi,24:$Vj,25:$Vk,26:$Vl,27:42},{38:[1,56]},{38:[1,57]},{38:[1,58]},{38:[1,59],42:[1,60],43:[1,61]},{28:[1,62]},{28:[2,8]},{28:[2,9]},{28:[2,10]},{28:[2,11]},{28:[2,12]},{28:[2,13]},{28:[2,14]},{28:[2,15]},{28:[2,16]},{28:[2,17]},{28:[2,18]},{28:[2,19]},o($V9,[2,25]),o($V9,[2,26]),o($V9,[2,27]),o($V9,[2,28]),{14:43,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi,24:$Vj,25:$Vk,26:$Vl,27:63},{28:$Vm,30:64},o($Vn,[2,21],{29:[1,66]}),{38:[1,67]},{42:[1,68]},{31:[1,69]},{28:[1,70]},o($V9,[2,29]),{14:43,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi,24:$Vj,25:$Vk,26:$Vl,27:72,28:$Vm,30:71},{28:[1,73]},o($Vn,[2,20]),{38:[1,74]},{43:[1,75]},{32:76,33:[1,77],34:[1,78]},o($V9,[2,30]),{28:$Vm,30:79},o($Vo,[2,22]),o($Vo,[2,23]),o($Vo,[2,24]),{38:[1,80]},o($V9,[2,31])],
-defaultActions: {10:[2,1],44:[2,8],45:[2,9],46:[2,10],47:[2,11],48:[2,12],49:[2,13],50:[2,14],51:[2,15],52:[2,16],53:[2,17],54:[2,18],55:[2,19]},
+table: [{3:1,4:2,6:3,7:4,8:[1,10],9:$V0,44:$V1,45:$V2,46:$V3,47:$V4},{1:[3]},{5:[1,11],6:12,9:$V0,44:$V1,45:$V2,46:$V3,47:$V4},o($V5,[2,3]),o($V5,[2,4]),{28:[1,13]},{28:[1,14],37:[1,15]},{28:[1,16],37:[1,17]},{28:[1,18],37:[1,19]},{38:[1,20]},{9:[1,21]},{1:[2,1]},o($V5,[2,2]),{38:[1,22]},{38:[1,23]},{38:[1,24]},{38:[1,25]},{38:[1,26]},{38:[1,27]},{38:[1,28]},o($V5,[2,39]),{10:[1,29]},o($V5,[2,32]),o($V5,[2,33]),o($V5,[2,36]),o($V5,[2,34]),o($V5,[2,37]),o($V5,[2,35]),o($V5,[2,38]),{11:30,13:31,35:$V6,39:$V7,40:$V8,41:$V9},{12:[1,36],13:37,35:$V6,39:$V7,40:$V8,41:$V9},o($Va,[2,7]),{36:[1,38]},{36:[1,39]},{36:[1,40]},{36:[1,41]},o($V5,[2,5]),o($Va,[2,6]),{37:[1,42]},{37:[1,43]},{37:[1,44]},{14:46,15:$Vb,16:$Vc,17:$Vd,18:$Ve,19:$Vf,20:$Vg,21:$Vh,22:$Vi,23:$Vj,24:$Vk,25:$Vl,26:$Vm,27:45},{38:[1,59]},{38:[1,60]},{38:[1,61]},{38:[1,62],42:[1,63],43:[1,64]},{28:[1,65]},{28:[2,8]},{28:[2,9]},{28:[2,10]},{28:[2,11]},{28:[2,12]},{28:[2,13]},{28:[2,14]},{28:[2,15]},{28:[2,16]},{28:[2,17]},{28:[2,18]},{28:[2,19]},o($Va,[2,25]),o($Va,[2,26]),o($Va,[2,27]),o($Va,[2,28]),{14:46,15:$Vb,16:$Vc,17:$Vd,18:$Ve,19:$Vf,20:$Vg,21:$Vh,22:$Vi,23:$Vj,24:$Vk,25:$Vl,26:$Vm,27:66},{28:$Vn,30:67},o($Vo,[2,21],{29:[1,69]}),{38:[1,70]},{42:[1,71]},{31:[1,72]},{28:[1,73]},o($Va,[2,29]),{14:46,15:$Vb,16:$Vc,17:$Vd,18:$Ve,19:$Vf,20:$Vg,21:$Vh,22:$Vi,23:$Vj,24:$Vk,25:$Vl,26:$Vm,27:75,28:$Vn,30:74},{28:[1,76]},o($Vo,[2,20]),{38:[1,77]},{43:[1,78]},{32:79,33:[1,80],34:[1,81]},o($Va,[2,30]),{28:$Vn,30:82},o($Vp,[2,22]),o($Vp,[2,23]),o($Vp,[2,24]),{38:[1,83]},o($Va,[2,31])],
+defaultActions: {11:[2,1],47:[2,8],48:[2,9],49:[2,10],50:[2,11],51:[2,12],52:[2,13],53:[2,14],54:[2,15],55:[2,16],56:[2,17],57:[2,18],58:[2,19]},
 parseError: function parseError(str, hash) {
     if (hash.recoverable) {
         this.trace(str);
@@ -1039,11 +1014,11 @@ case 1:return 37
 break;
 case 2:return 28
 break;
-case 3:return 44
+case 3:return 45
 break;
-case 4:return 45
+case 4:return 46
 break;
-case 5:return 46
+case 5:return 47
 break;
 case 6:return 8
 break;
@@ -1057,62 +1032,64 @@ case 10:return 40
 break;
 case 11:return 41
 break;
-case 12:return 42
+case 12:return 44
 break;
-case 13:return 43
+case 13:return 42
 break;
-case 14:return 'T_SLASH'
+case 14:return 43
 break;
-case 15:return 38
+case 15:return 'T_SLASH'
 break;
-case 16:return 31
+case 16:return 38
 break;
-case 17:return 36
+case 17:return 31
 break;
-case 18:return 29
+case 18:return 36
 break;
-case 19:return 10
+case 19:return 29
 break;
-case 20:return 12
+case 20:return 10
 break;
-case 21:return 34
+case 21:return 12
 break;
-case 22:return 33
+case 22:return 34
 break;
-case 23:return 15
+case 23:return 33
 break;
-case 24:return 16
+case 24:return 15
 break;
-case 25:return 17
+case 25:return 16
 break;
-case 26:return 18
+case 26:return 17
 break;
-case 27:return 19
+case 27:return 18
 break;
-case 28:return 20
+case 28:return 19
 break;
-case 29:return 21
+case 29:return 20
 break;
-case 30:return 22
+case 30:return 21
 break;
-case 31:return 23
+case 31:return 22
 break;
-case 32:return 24
+case 32:return 23
 break;
-case 33:return 25
+case 33:return 24
 break;
-case 34:return 26
+case 34:return 25
 break;
-case 35:return 'T_PLS'
+case 35:return 26
 break;
-case 36:return 5
+case 36:return 'T_PLS'
 break;
-case 37:return 'INVALID'
+case 37:return 5
+break;
+case 38:return 'INVALID'
 break;
 }
 },
-rules: [/^(?:\s+)/,/^(?:"[^"]*")/,/^(?:[0-9]+(\.[0-9]+)?\b)/,/^(?:cp\b)/,/^(?:rm\b)/,/^(?:act\b)/,/^(?:open\b)/,/^(?:cal\b)/,/^(?:title\b)/,/^(?:where\b)/,/^(?:desc\b)/,/^(?:when\b)/,/^(?:-)/,/^(?:@)/,/^(?:\/)/,/^(?:;)/,/^(?::)/,/^(?:=)/,/^(?:,)/,/^(?:\{)/,/^(?:\})/,/^(?:[Pp][Mm])/,/^(?:[Aa][Mm])/,/^(?:[Jj](an))/,/^(?:[Ff](eb))/,/^(?:[Mm](ar))/,/^(?:[Aa](pr))/,/^(?:[Mm](ay))/,/^(?:[Jj](un))/,/^(?:[Jj](ul))/,/^(?:[Aa](ug))/,/^(?:[Ss](ep))/,/^(?:[Oo](ct))/,/^(?:[Nn](ov))/,/^(?:[Dd](ec))/,/^(?:pls\b)/,/^(?:$)/,/^(?:.)/],
-conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37],"inclusive":true}}
+rules: [/^(?:\s+)/,/^(?:"[^"]*")/,/^(?:[0-9]+(\.[0-9]+)?\b)/,/^(?:cp\b)/,/^(?:rm\b)/,/^(?:act\b)/,/^(?:open\b)/,/^(?:cal\b)/,/^(?:title\b)/,/^(?:where\b)/,/^(?:desc\b)/,/^(?:when\b)/,/^(?:page\b)/,/^(?:-)/,/^(?:@)/,/^(?:\/)/,/^(?:;)/,/^(?::)/,/^(?:=)/,/^(?:,)/,/^(?:\{)/,/^(?:\})/,/^(?:[Pp][Mm])/,/^(?:[Aa][Mm])/,/^(?:[Jj](an))/,/^(?:[Ff](eb))/,/^(?:[Mm](ar))/,/^(?:[Aa](pr))/,/^(?:[Mm](ay))/,/^(?:[Jj](un))/,/^(?:[Jj](ul))/,/^(?:[Aa](ug))/,/^(?:[Ss](ep))/,/^(?:[Oo](ct))/,/^(?:[Nn](ov))/,/^(?:[Dd](ec))/,/^(?:pls\b)/,/^(?:$)/,/^(?:.)/],
+conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38],"inclusive":true}}
 });
 return lexer;
 })();
