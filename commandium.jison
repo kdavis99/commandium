@@ -421,34 +421,30 @@ cal_detail
 command
   : T_PAGE T_NUM_CONST T_SEMIC
      {{
-	console.log("here");
-	console.log("before");
-	console.log(all_tabs[$2].id);
-	console.log(document.documentElement.innerHTML);
 	chrome.tabs.executeScript(all_tabs[$2].id, {code: "document.documentElement.outerHTML"},
-		function (result) {
-		   var prefix = "https://www.google.com/#q=";
-		   for (index in result) {
-		      var words = result[index].split(" ");
-		      for (word in words) {
-		         var word_count = 0;
-	                 if (words[word] == "recognition") {
-			    while (words[word] != "human" && word_count <= 11) {
-			       prefix = prefix + words[word] + "+";
-			       word++;
-			       word_count++;
-			    }
-			    if (word_count > 11) {
-			       word_count = 0;
-			       prefix = "https://www.google.com/#q=";
-		            } else {
-			      prefix = prefix + words[word];
-			      chrome.tabs.create({url: prefix});
-			    }
-	                 }
-		      }
-                   }
-		});
+	    function (result) {
+	      var prefix = "https://www.google.com/#q=";
+	      for (index in result) {
+		var words = result[index].split(" ");
+		for (word in words) {
+		  var word_count = 0;
+	          if (words[word] == "recognition") {
+		    while (words[word] != "human" && word_count <= 11) {
+	              prefix = prefix + words[word] + "+";
+		      word++;
+		      word_count++;
+                    }
+		    if (word_count > 11) {
+		      word_count = 0;
+		      prefix = "https://www.google.com/#q=";
+		    } else {
+		      prefix = prefix + words[word];
+		      chrome.tabs.create({url: prefix});
+	            }
+	          }
+		}
+              }
+            });
      }}
   | T_CP T_NUM_CONST T_SEMIC 
      {{
@@ -497,8 +493,4 @@ command
 	  }
 	}
      }}
- | T_CAL T_SEMIC// start_statement_block attributes end_statement_block
-     {{
-	chrome.tabs.create({url: "http://www.google.com/calendar/event?action=TEMPLATE&text=B.B.%20King&dates=20090522T193000/20090524T003000&details=&sprop=website:www.mountainwinery.com&location=The%20Mountain%20Winery,%2014831%20Pierce%20Road,%20Saratoga,%20CA%2095070"});
-    }}
     ;
