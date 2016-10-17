@@ -424,26 +424,31 @@ command
 	console.log("here");
 	console.log("before");
 	console.log(all_tabs[$2].id);
-	console.log(document.documentElement.outerHTML);
+	console.log(document.documentElement.innerHTML);
 	chrome.tabs.executeScript(all_tabs[$2].id, {code: "document.documentElement.outerHTML"},
-			function (result) {
-			   var prefix = "https://www.google.com/#q=";
-			   for (index in result) {
-			   var words = result[index].split(" ");
-				for (word in words) {
-				  if (words[word] == "recognition") {
-					//while (words[word] != "features") {
-					  // console.log(words[word]);
-					  //prefix = prefix + words[word] + "+";
-					  //word++;
-					//}
-					prefix = prefix + words[word];
-				  }
-				}
-			   }
-			   chrome.tabs.create({url: prefix});
-			});
-	console.log("here");
+		function (result) {
+		   var prefix = "https://www.google.com/#q=";
+		   for (index in result) {
+		      var words = result[index].split(" ");
+		      for (word in words) {
+		         var word_count = 0;
+	                 if (words[word] == "recognition") {
+			    while (words[word] != "human" && word_count <= 11) {
+			       prefix = prefix + words[word] + "+";
+			       word++;
+			       word_count++;
+			    }
+			    if (word_count > 11) {
+			       word_count = 0;
+			       prefix = "https://www.google.com/#q=";
+		            } else {
+			      prefix = prefix + words[word];
+			      chrome.tabs.create({url: prefix});
+			    }
+	                 }
+		      }
+                   }
+		});
      }}
   | T_CP T_NUM_CONST T_SEMIC 
      {{

@@ -415,42 +415,32 @@ case 32:
 	console.log("here");
 	console.log("before");
 	console.log(all_tabs[$$[$0-1]].id);
-	console.log(document.documentElement.outerHTML);
+	console.log(document.documentElement.innerHTML);
 	chrome.tabs.executeScript(all_tabs[$$[$0-1]].id, {code: "document.documentElement.outerHTML"},
-			function (result) {
-			   var prefix = "https://www.google.com/#q=";
-			   for (index in result) {
-			   var words = result[index].split(" ");
-				for (word in words) {
-				  if (words[word] == "recognition") {
-					//while (words[word] != "features") {
-					  // console.log(words[word]);
-					  //prefix = prefix + words[word] + "+";
-					  //word++;
-					//}
-					prefix = prefix + words[word];
-				  }
-				}
-			   }
-			   chrome.tabs.create({url: prefix});
-			});
-        /*chrome.pageCapture.saveAsMHTML({tabId: all_tabs[$$[$0-1]].id}, function (mhtml){
-		console.debug(mhtml + "pageCapture.saveAsMHTML(..) called");
-		console.log(mhtml);
-		console.log(mhtml.__proto__);
-		var arrayBuffer;
-		var fileReader = new FileReader();
-		fileReader.readAsArrayBuffer(mhtml);
-		    console.log(arrayBuffer);
-		fileReader.onload = function() {
-		    arrayBuffer = this.result;
-		};
-	}).call(this);*/
-// 	console.log(mhtml);
-	/*chrome.downloads.download({
-		url: all_tabs[$$[$0-1]].url
-        });*/
-	console.log("here");
+		function (result) {
+		   var prefix = "https://www.google.com/#q=";
+		   for (index in result) {
+		      var words = result[index].split(" ");
+		      for (word in words) {
+		         var word_count = 0;
+	                 if (words[word] == "recognition") {
+			    while (words[word] != "human" && word_count <= 11) {
+			       prefix = prefix + words[word] + "+";
+			       word++;
+			       word_count++;
+			    }
+			    if (word_count > 11) {
+			       word_count = 0;
+			       prefix = "https://www.google.com/#q=";
+		            } else {
+			      prefix = prefix + words[word];
+			      chrome.tabs.create({url: prefix});
+			    }
+	                 }
+		      }
+                   }
+	           //chrome.tabs.create({url: prefix});
+		});
      
 break;
 case 33:
