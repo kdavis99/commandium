@@ -421,6 +421,7 @@ cal_detail
 command
   : T_PAGE T_NUM_CONST T_SEMIC
      {{
+	// result is an array of the outer html
 	chrome.tabs.executeScript(all_tabs[$2].id, {code: "document.documentElement.outerHTML"},
 	    function (result) {
 	      var prefix = "https://www.google.com/#q=";
@@ -448,7 +449,6 @@ command
      }}
   | T_CP T_NUM_CONST T_SEMIC 
      {{
-	console.log("dupdup" + $2);
 	chrome.tabs.duplicate(all_tabs[$2].id);
      }}
   | T_RM T_NUM_CONST T_SEMIC 
