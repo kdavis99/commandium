@@ -34,7 +34,7 @@
 "where"		      return 'T_LOCATION'
 "desc"	      	      return 'T_DESC'
 "when"		      return 'T_WHEN'
-"page"		      return 'T_PAGE'
+"search"	      return 'T_SEARCH'
 "-"		      return 'T_DASH'
 "@"		      return 'T_AT'
 "/"		      return 'T_SLASH'
@@ -419,18 +419,20 @@ cal_detail
   ;
 
 command
-  : T_PAGE T_NUM_CONST T_SEMIC
+  : T_SEARCH T_EQUAL T_STRING_CONST T_DASH T_STRING_CONST T_SEMIC
      {{
 	// result is an array of the outer html
-	chrome.tabs.executeScript(all_tabs[$2].id, {code: "document.documentElement.outerHTML"},
+	start_search = $3.substring(1, $3.length - 1).toLowerCase();
+	end_search = $5.substring(1, $5.length - 1).toLowerCase();
+	chrome.tabs.executeScript({code: "document.documentElement.outerHTML"},
 	    function (result) {
 	      var prefix = "https://www.google.com/#q=";
 	      for (index in result) {
 		var words = result[index].split(" ");
 		for (word in words) {
 		  var word_count = 0;
-	          if (words[word] == "recognition") {
-		    while (words[word] != "human" && word_count <= 11) {
+	          if (words[word] == start_search) {
+		    while (words[word] != end_search && word_count <= 11) {
 	              prefix = prefix + words[word] + "+";
 		      word++;
 		      word_count++;
