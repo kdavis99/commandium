@@ -422,8 +422,8 @@ command
   : T_SEARCH T_EQUAL T_STRING_CONST T_DASH T_STRING_CONST T_SEMIC
      {{
 	// result is an array of the outer html
-	start_search = $3.substring(1, $3.length - 1).toLowerCase();
-	end_search = $5.substring(1, $5.length - 1).toLowerCase();
+	start_search = $3.substring(1, $3.length - 1);
+	end_search = $5.substring(1, $5.length - 1);
 	chrome.tabs.executeScript({code: "document.documentElement.outerHTML"},
 	    function (result) {
 	      var prefix = "https://www.google.com/#q=";
@@ -431,8 +431,14 @@ command
 		var words = result[index].split(" ");
 		for (word in words) {
 		  var word_count = 0;
-	          if (words[word] == start_search) {
-		    while (words[word] != end_search && word_count <= 11) {
+		  // includes is necessary because sometimes the start_search
+		  // is also the beginning of a html div/tag.
+                  // i.e. html source = "<i>this is so much fun</i>
+                  // var results = ["<i>this", "is", "so", "much", "fun</i>"]
+	          if (words[word].includes(start_search)) {
+                    prefix = prefix + start_search + "+";
+                    word++;
+		    while (!words[word].includes(end_search) && word_count <= 11) {
 	              prefix = prefix + words[word] + "+";
 		      word++;
 		      word_count++;
@@ -441,7 +447,7 @@ command
 		      word_count = 0;
 		      prefix = "https://www.google.com/#q=";
 		    } else {
-		      prefix = prefix + words[word];
+		      prefix = prefix + end_search;
 		      chrome.tabs.create({url: prefix});
 	            }
 	          }
