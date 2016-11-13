@@ -423,11 +423,10 @@ cal_detail
 command
   : T_SEARCH T_EQUAL T_WORD T_DASH T_WORD T_SEMIC
      {{
-	// result is an array of the outer html
-	// start_search = $3.substring(1, $3.length - 1);
-	// end_search = $5.substring(1, $5.length - 1);
+	// Regular Google search
 	start_search = $3;
 	end_search = $5;
+	// result is an array of the outer html
 	chrome.tabs.executeScript({code: "document.documentElement.outerHTML"},
 	    function (result) {
 	      var prefix = "https://www.google.com/#q=";
@@ -461,6 +460,7 @@ command
      }}
   | T_QUOTE_SEARCH T_EQUAL T_WORD T_DASH T_WORD T_SEMIC
      {{
+	// Google search with quotes around the query
 	// result is an array of the outer html
 	start_search = $3;
 	end_search = $5;
