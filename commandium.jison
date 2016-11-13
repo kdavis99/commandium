@@ -34,7 +34,8 @@
 "where"		      return 'T_LOCATION'
 "desc"	      	      return 'T_DESC'
 "when"		      return 'T_WHEN'
-"search"	      return 'T_SEARCH'
+"sea"	      	      return 'T_SEARCH'
+"qsear"	      	      return 'T_QUOTE_SEARCH'
 "-"		      return 'T_DASH'
 "@"		      return 'T_AT'
 "/"		      return 'T_SLASH'
@@ -59,6 +60,7 @@
 [Nn](ov)              return 'T_NOV'
 [Dd](ec)              return 'T_DEC'
 "pls"		      return 'T_PLS'
+[a-zA-Z0-9]+	      return 'T_WORD'
 <<EOF>>	 	      return 'EOF'
 .                     return 'INVALID'
 
@@ -419,11 +421,13 @@ cal_detail
   ;
 
 command
-  : T_SEARCH T_EQUAL T_STRING_CONST T_DASH T_STRING_CONST T_SEMIC
+  : T_SEARCH T_EQUAL T_WORD T_DASH T_WORD T_SEMIC
      {{
 	// result is an array of the outer html
-	start_search = $3.substring(1, $3.length - 1);
-	end_search = $5.substring(1, $5.length - 1);
+	// start_search = $3.substring(1, $3.length - 1);
+	// end_search = $5.substring(1, $5.length - 1);
+	start_search = $3;
+	end_search = $5;
 	chrome.tabs.executeScript({code: "document.documentElement.outerHTML"},
 	    function (result) {
 	      var prefix = "https://www.google.com/#q=";
@@ -455,6 +459,42 @@ command
               }
             });
      }}
+  | T_QUOTE_SEARCH T_EQUAL T_WORD T_DASH T_WORD T_SEMIC
+     {{
+	// result is an array of the outer html
+	start_search = $3;
+	end_search = $5;
+	chrome.tabs.executeScript({code: "document.documentElement.outerHTML"},
+	    function (result) {
+	      var prefix = "https://www.google.com/#q=%22";
+	      for (index in result) {
+		var words = result[index].split(" ");
+		for (word in words) {
+		  var word_count = 0;
+		  // includes is necessary because sometimes the start_search
+		  // is also the beginning of a html div/tag.
+                  // i.e. html source = "<i>this is so much fun</i>
+                  // var results = ["<i>this", "is", "so", "much", "fun</i>"]
+	          if (words[word].includes(start_search)) {
+                    prefix = prefix + start_search + "+";
+                    word++;
+		    while (!words[word].includes(end_search) && word_count <= 11) {
+	              prefix = prefix + words[word] + "+";
+		      word++;
+		      word_count++;
+                    }
+		    if (word_count > 11) {
+		      word_count = 0;
+		      prefix = "https://www.google.com/#q=%22";
+		    } else {
+		      prefix = prefix + end_search + "%22";
+		      chrome.tabs.create({url: prefix});
+	            }
+	          }
+		}
+              }
+            });
+     }}
   | T_CP T_NUM_CONST T_SEMIC 
      {{
 	chrome.tabs.duplicate(all_tabs[$2].id);
@@ -467,10 +507,11 @@ command
      {{
 	chrome.tabs.update(all_tabs[$2].id, {active: true});
      }}
-  | T_CP T_STRING_CONST T_SEMIC 
+  | T_CP T_WORD T_SEMIC 
      {{
 	// removes the double quotes (") from a string const
-	title_substr = $2.substring(1, $2.length - 1).toLowerCase();
+	// title_substr = $2.substring(1, $2.length - 1).toLowerCase();
+	title_substr = $2.toLowerCase();
 	for (m_id in map_tabs) {
 	  if (map_tabs[m_id].url.toLowerCase().includes(title_substr) || 
 		map_tabs[m_id].title.toLowerCase().includes(title_substr)) {
@@ -478,10 +519,9 @@ command
 	  }
 	}
      }}
-  | T_RM T_STRING_CONST T_SEMIC 
+  | T_RM T_WORD T_SEMIC 
      {{
-	// removes the double quotes (") from a string const
-	title_substr = $2.substring(1, $2.length - 1).toLowerCase();
+	title_substr = $2.toLowerCase();
 	for (m_id in map_tabs) {
 	  if (map_tabs[m_id].url.toLowerCase().includes(title_substr) || 
 		map_tabs[m_id].title.toLowerCase().includes(title_substr)) {
@@ -489,10 +529,9 @@ command
 	  }
 	}
      }}
-  | T_ACTIVE T_STRING_CONST T_SEMIC
+  | T_ACTIVE T_WORD T_SEMIC
      {{
-	// removes the double quotes (") from a string const
-	title_substr = $2.substring(1, $2.length - 1).toLowerCase();
+	title_substr = $2.toLowerCase();
 	for (m_id in map_tabs) {
 	  if (map_tabs[m_id].url.toLowerCase().includes(title_substr) || 
 		map_tabs[m_id].title.toLowerCase().includes(title_substr)) {

@@ -86,12 +86,12 @@
       // (like duplicate). Needed for: "<name> cp; rmcps;"
    });
 var commandium = (function(){
-var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,5],$V1=[1,6],$V2=[1,7],$V3=[1,8],$V4=[5,44,45,46,47],$V5=[1,31],$V6=[1,32],$V7=[1,33],$V8=[1,34],$V9=[12,35,39,40,41],$Va=[1,48],$Vb=[1,49],$Vc=[1,50],$Vd=[1,51],$Ve=[1,52],$Vf=[1,53],$Vg=[1,54],$Vh=[1,55],$Vi=[1,56],$Vj=[1,57],$Vk=[1,58],$Vl=[1,59],$Vm=[1,69],$Vn=[38,42,43],$Vo=[38,42];
+var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,5],$V1=[1,6],$V2=[1,7],$V3=[1,8],$V4=[1,9],$V5=[5,44,46,47,48,49],$V6=[1,35],$V7=[1,36],$V8=[1,37],$V9=[1,38],$Va=[12,35,39,40,41],$Vb=[1,54],$Vc=[1,55],$Vd=[1,56],$Ve=[1,57],$Vf=[1,58],$Vg=[1,59],$Vh=[1,60],$Vi=[1,61],$Vj=[1,62],$Vk=[1,63],$Vl=[1,64],$Vm=[1,65],$Vn=[1,75],$Vo=[38,42,43],$Vp=[38,42];
 var parser = {trace: function trace() { },
 yy: {},
-symbols_: {"error":2,"input":3,"commands":4,"EOF":5,"command":6,"google_cmds":7,"T_OPEN":8,"T_CAL":9,"T_LBRACE":10,"cal_details":11,"T_RBRACE":12,"cal_detail":13,"month":14,"T_JAN":15,"T_FEB":16,"T_MAR":17,"T_APR":18,"T_MAY":19,"T_JUN":20,"T_JUL":21,"T_AUG":22,"T_SEP":23,"T_OCT":24,"T_NOV":25,"T_DEC":26,"date":27,"T_NUM_CONST":28,"T_COMMA":29,"time":30,"T_COLON":31,"period":32,"T_AM":33,"T_PM":34,"T_TITLE":35,"T_EQUAL":36,"T_STRING_CONST":37,"T_SEMIC":38,"T_LOCATION":39,"T_DESC":40,"T_WHEN":41,"T_DASH":42,"T_AT":43,"T_SEARCH":44,"T_CP":45,"T_RM":46,"T_ACTIVE":47,"$accept":0,"$end":1},
-terminals_: {2:"error",5:"EOF",8:"T_OPEN",9:"T_CAL",10:"T_LBRACE",12:"T_RBRACE",15:"T_JAN",16:"T_FEB",17:"T_MAR",18:"T_APR",19:"T_MAY",20:"T_JUN",21:"T_JUL",22:"T_AUG",23:"T_SEP",24:"T_OCT",25:"T_NOV",26:"T_DEC",28:"T_NUM_CONST",29:"T_COMMA",31:"T_COLON",33:"T_AM",34:"T_PM",35:"T_TITLE",36:"T_EQUAL",37:"T_STRING_CONST",38:"T_SEMIC",39:"T_LOCATION",40:"T_DESC",41:"T_WHEN",42:"T_DASH",43:"T_AT",44:"T_SEARCH",45:"T_CP",46:"T_RM",47:"T_ACTIVE"},
-productions_: [0,[3,2],[4,2],[4,1],[4,1],[7,5],[11,2],[11,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[27,4],[27,2],[30,4],[32,1],[32,1],[13,4],[13,4],[13,4],[13,4],[13,6],[13,8],[13,10],[6,6],[6,3],[6,3],[6,3],[6,3],[6,3],[6,3]],
+symbols_: {"error":2,"input":3,"commands":4,"EOF":5,"command":6,"google_cmds":7,"T_OPEN":8,"T_CAL":9,"T_LBRACE":10,"cal_details":11,"T_RBRACE":12,"cal_detail":13,"month":14,"T_JAN":15,"T_FEB":16,"T_MAR":17,"T_APR":18,"T_MAY":19,"T_JUN":20,"T_JUL":21,"T_AUG":22,"T_SEP":23,"T_OCT":24,"T_NOV":25,"T_DEC":26,"date":27,"T_NUM_CONST":28,"T_COMMA":29,"time":30,"T_COLON":31,"period":32,"T_AM":33,"T_PM":34,"T_TITLE":35,"T_EQUAL":36,"T_STRING_CONST":37,"T_SEMIC":38,"T_LOCATION":39,"T_DESC":40,"T_WHEN":41,"T_DASH":42,"T_AT":43,"T_SEARCH":44,"T_WORD":45,"T_QUOTE_SEARCH":46,"T_CP":47,"T_RM":48,"T_ACTIVE":49,"$accept":0,"$end":1},
+terminals_: {2:"error",5:"EOF",8:"T_OPEN",9:"T_CAL",10:"T_LBRACE",12:"T_RBRACE",15:"T_JAN",16:"T_FEB",17:"T_MAR",18:"T_APR",19:"T_MAY",20:"T_JUN",21:"T_JUL",22:"T_AUG",23:"T_SEP",24:"T_OCT",25:"T_NOV",26:"T_DEC",28:"T_NUM_CONST",29:"T_COMMA",31:"T_COLON",33:"T_AM",34:"T_PM",35:"T_TITLE",36:"T_EQUAL",37:"T_STRING_CONST",38:"T_SEMIC",39:"T_LOCATION",40:"T_DESC",41:"T_WHEN",42:"T_DASH",43:"T_AT",44:"T_SEARCH",45:"T_WORD",46:"T_QUOTE_SEARCH",47:"T_CP",48:"T_RM",49:"T_ACTIVE"},
+productions_: [0,[3,2],[4,2],[4,1],[4,1],[7,5],[11,2],[11,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[14,1],[27,4],[27,2],[30,4],[32,1],[32,1],[13,4],[13,4],[13,4],[13,4],[13,6],[13,8],[13,10],[6,6],[6,6],[6,3],[6,3],[6,3],[6,3],[6,3],[6,3]],
 performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
 /* this == yyval */
 
@@ -413,8 +413,10 @@ break;
 case 32:
 
 	// result is an array of the outer html
-	start_search = $$[$0-3].substring(1, $$[$0-3].length - 1);
-	end_search = $$[$0-1].substring(1, $$[$0-1].length - 1);
+	// start_search = $$[$0-3].substring(1, $$[$0-3].length - 1);
+	// end_search = $$[$0-1].substring(1, $$[$0-1].length - 1);
+	start_search = $$[$0-3];
+	end_search = $$[$0-1];
 	chrome.tabs.executeScript({code: "document.documentElement.outerHTML"},
 	    function (result) {
 	      var prefix = "https://www.google.com/#q=";
@@ -449,23 +451,61 @@ case 32:
 break;
 case 33:
 
-	chrome.tabs.duplicate(all_tabs[$$[$0-1]].id);
+	// result is an array of the outer html
+	start_search = $$[$0-3];
+	end_search = $$[$0-1];
+	chrome.tabs.executeScript({code: "document.documentElement.outerHTML"},
+	    function (result) {
+	      var prefix = "https://www.google.com/#q=%22";
+	      for (index in result) {
+		var words = result[index].split(" ");
+		for (word in words) {
+		  var word_count = 0;
+		  // includes is necessary because sometimes the start_search
+		  // is also the beginning of a html div/tag.
+                  // i.e. html source = "<i>this is so much fun</i>
+                  // var results = ["<i>this", "is", "so", "much", "fun</i>"]
+	          if (words[word].includes(start_search)) {
+                    prefix = prefix + start_search + "+";
+                    word++;
+		    while (!words[word].includes(end_search) && word_count <= 11) {
+	              prefix = prefix + words[word] + "+";
+		      word++;
+		      word_count++;
+                    }
+		    if (word_count > 11) {
+		      word_count = 0;
+		      prefix = "https://www.google.com/#q=%22";
+		    } else {
+		      prefix = prefix + end_search + "%22";
+		      chrome.tabs.create({url: prefix});
+	            }
+	          }
+		}
+              }
+            });
      
 break;
 case 34:
 
-	chrome.tabs.remove(all_tabs[$$[$0-1]].id);
+	chrome.tabs.duplicate(all_tabs[$$[$0-1]].id);
      
 break;
 case 35:
 
-	chrome.tabs.update(all_tabs[$$[$0-1]].id, {active: true});
+	chrome.tabs.remove(all_tabs[$$[$0-1]].id);
      
 break;
 case 36:
 
+	chrome.tabs.update(all_tabs[$$[$0-1]].id, {active: true});
+     
+break;
+case 37:
+
 	// removes the double quotes (") from a string const
-	title_substr = $$[$0-1].substring(1, $$[$0-1].length - 1).toLowerCase();
+	// title_substr = $$[$0-1].substring(1, $$[$0-1].length - 1).toLowerCase();
+	title_substr = $$[$0-1].toLowerCase();
 	for (m_id in map_tabs) {
 	  if (map_tabs[m_id].url.toLowerCase().includes(title_substr) || 
 		map_tabs[m_id].title.toLowerCase().includes(title_substr)) {
@@ -474,10 +514,9 @@ case 36:
 	}
      
 break;
-case 37:
+case 38:
 
-	// removes the double quotes (") from a string const
-	title_substr = $$[$0-1].substring(1, $$[$0-1].length - 1).toLowerCase();
+	title_substr = $$[$0-1].toLowerCase();
 	for (m_id in map_tabs) {
 	  if (map_tabs[m_id].url.toLowerCase().includes(title_substr) || 
 		map_tabs[m_id].title.toLowerCase().includes(title_substr)) {
@@ -486,10 +525,9 @@ case 37:
 	}
      
 break;
-case 38:
+case 39:
 
-	// removes the double quotes (") from a string const
-	title_substr = $$[$0-1].substring(1, $$[$0-1].length - 1).toLowerCase();
+	title_substr = $$[$0-1].toLowerCase();
 	for (m_id in map_tabs) {
 	  if (map_tabs[m_id].url.toLowerCase().includes(title_substr) || 
 		map_tabs[m_id].title.toLowerCase().includes(title_substr)) {
@@ -501,8 +539,8 @@ case 38:
 break;
 }
 },
-table: [{3:1,4:2,6:3,7:4,8:[1,9],44:$V0,45:$V1,46:$V2,47:$V3},{1:[3]},{5:[1,10],6:11,44:$V0,45:$V1,46:$V2,47:$V3},o($V4,[2,3]),o($V4,[2,4]),{36:[1,12]},{28:[1,13],37:[1,14]},{28:[1,15],37:[1,16]},{28:[1,17],37:[1,18]},{9:[1,19]},{1:[2,1]},o($V4,[2,2]),{37:[1,20]},{38:[1,21]},{38:[1,22]},{38:[1,23]},{38:[1,24]},{38:[1,25]},{38:[1,26]},{10:[1,27]},{42:[1,28]},o($V4,[2,33]),o($V4,[2,36]),o($V4,[2,34]),o($V4,[2,37]),o($V4,[2,35]),o($V4,[2,38]),{11:29,13:30,35:$V5,39:$V6,40:$V7,41:$V8},{37:[1,35]},{12:[1,36],13:37,35:$V5,39:$V6,40:$V7,41:$V8},o($V9,[2,7]),{36:[1,38]},{36:[1,39]},{36:[1,40]},{36:[1,41]},{38:[1,42]},o($V4,[2,5]),o($V9,[2,6]),{37:[1,43]},{37:[1,44]},{37:[1,45]},{14:47,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi,24:$Vj,25:$Vk,26:$Vl,27:46},o($V4,[2,32]),{38:[1,60]},{38:[1,61]},{38:[1,62]},{38:[1,63],42:[1,64],43:[1,65]},{28:[1,66]},{28:[2,8]},{28:[2,9]},{28:[2,10]},{28:[2,11]},{28:[2,12]},{28:[2,13]},{28:[2,14]},{28:[2,15]},{28:[2,16]},{28:[2,17]},{28:[2,18]},{28:[2,19]},o($V9,[2,25]),o($V9,[2,26]),o($V9,[2,27]),o($V9,[2,28]),{14:47,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi,24:$Vj,25:$Vk,26:$Vl,27:67},{28:$Vm,30:68},o($Vn,[2,21],{29:[1,70]}),{38:[1,71]},{42:[1,72]},{31:[1,73]},{28:[1,74]},o($V9,[2,29]),{14:47,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi,24:$Vj,25:$Vk,26:$Vl,27:76,28:$Vm,30:75},{28:[1,77]},o($Vn,[2,20]),{38:[1,78]},{43:[1,79]},{32:80,33:[1,81],34:[1,82]},o($V9,[2,30]),{28:$Vm,30:83},o($Vo,[2,22]),o($Vo,[2,23]),o($Vo,[2,24]),{38:[1,84]},o($V9,[2,31])],
-defaultActions: {10:[2,1],48:[2,8],49:[2,9],50:[2,10],51:[2,11],52:[2,12],53:[2,13],54:[2,14],55:[2,15],56:[2,16],57:[2,17],58:[2,18],59:[2,19]},
+table: [{3:1,4:2,6:3,7:4,8:[1,10],44:$V0,46:$V1,47:$V2,48:$V3,49:$V4},{1:[3]},{5:[1,11],6:12,44:$V0,46:$V1,47:$V2,48:$V3,49:$V4},o($V5,[2,3]),o($V5,[2,4]),{36:[1,13]},{36:[1,14]},{28:[1,15],45:[1,16]},{28:[1,17],45:[1,18]},{28:[1,19],45:[1,20]},{9:[1,21]},{1:[2,1]},o($V5,[2,2]),{45:[1,22]},{45:[1,23]},{38:[1,24]},{38:[1,25]},{38:[1,26]},{38:[1,27]},{38:[1,28]},{38:[1,29]},{10:[1,30]},{42:[1,31]},{42:[1,32]},o($V5,[2,34]),o($V5,[2,37]),o($V5,[2,35]),o($V5,[2,38]),o($V5,[2,36]),o($V5,[2,39]),{11:33,13:34,35:$V6,39:$V7,40:$V8,41:$V9},{45:[1,39]},{45:[1,40]},{12:[1,41],13:42,35:$V6,39:$V7,40:$V8,41:$V9},o($Va,[2,7]),{36:[1,43]},{36:[1,44]},{36:[1,45]},{36:[1,46]},{38:[1,47]},{38:[1,48]},o($V5,[2,5]),o($Va,[2,6]),{37:[1,49]},{37:[1,50]},{37:[1,51]},{14:53,15:$Vb,16:$Vc,17:$Vd,18:$Ve,19:$Vf,20:$Vg,21:$Vh,22:$Vi,23:$Vj,24:$Vk,25:$Vl,26:$Vm,27:52},o($V5,[2,32]),o($V5,[2,33]),{38:[1,66]},{38:[1,67]},{38:[1,68]},{38:[1,69],42:[1,70],43:[1,71]},{28:[1,72]},{28:[2,8]},{28:[2,9]},{28:[2,10]},{28:[2,11]},{28:[2,12]},{28:[2,13]},{28:[2,14]},{28:[2,15]},{28:[2,16]},{28:[2,17]},{28:[2,18]},{28:[2,19]},o($Va,[2,25]),o($Va,[2,26]),o($Va,[2,27]),o($Va,[2,28]),{14:53,15:$Vb,16:$Vc,17:$Vd,18:$Ve,19:$Vf,20:$Vg,21:$Vh,22:$Vi,23:$Vj,24:$Vk,25:$Vl,26:$Vm,27:73},{28:$Vn,30:74},o($Vo,[2,21],{29:[1,76]}),{38:[1,77]},{42:[1,78]},{31:[1,79]},{28:[1,80]},o($Va,[2,29]),{14:53,15:$Vb,16:$Vc,17:$Vd,18:$Ve,19:$Vf,20:$Vg,21:$Vh,22:$Vi,23:$Vj,24:$Vk,25:$Vl,26:$Vm,27:82,28:$Vn,30:81},{28:[1,83]},o($Vo,[2,20]),{38:[1,84]},{43:[1,85]},{32:86,33:[1,87],34:[1,88]},o($Va,[2,30]),{28:$Vn,30:89},o($Vp,[2,22]),o($Vp,[2,23]),o($Vp,[2,24]),{38:[1,90]},o($Va,[2,31])],
+defaultActions: {11:[2,1],54:[2,8],55:[2,9],56:[2,10],57:[2,11],58:[2,12],59:[2,13],60:[2,14],61:[2,15],62:[2,16],63:[2,17],64:[2,18],65:[2,19]},
 parseError: function parseError(str, hash) {
     if (hash.recoverable) {
         this.trace(str);
@@ -1002,11 +1040,11 @@ case 1:return 37
 break;
 case 2:return 28
 break;
-case 3:return 45
+case 3:return 47
 break;
-case 4:return 46
+case 4:return 48
 break;
-case 5:return 47
+case 5:return 49
 break;
 case 6:return 8
 break;
@@ -1022,62 +1060,66 @@ case 11:return 41
 break;
 case 12:return 44
 break;
-case 13:return 42
+case 13:return 46
 break;
-case 14:return 43
+case 14:return 42
 break;
-case 15:return 'T_SLASH'
+case 15:return 43
 break;
-case 16:return 38
+case 16:return 'T_SLASH'
 break;
-case 17:return 31
+case 17:return 38
 break;
-case 18:return 36
+case 18:return 31
 break;
-case 19:return 29
+case 19:return 36
 break;
-case 20:return 10
+case 20:return 29
 break;
-case 21:return 12
+case 21:return 10
 break;
-case 22:return 34
+case 22:return 12
 break;
-case 23:return 33
+case 23:return 34
 break;
-case 24:return 15
+case 24:return 33
 break;
-case 25:return 16
+case 25:return 15
 break;
-case 26:return 17
+case 26:return 16
 break;
-case 27:return 18
+case 27:return 17
 break;
-case 28:return 19
+case 28:return 18
 break;
-case 29:return 20
+case 29:return 19
 break;
-case 30:return 21
+case 30:return 20
 break;
-case 31:return 22
+case 31:return 21
 break;
-case 32:return 23
+case 32:return 22
 break;
-case 33:return 24
+case 33:return 23
 break;
-case 34:return 25
+case 34:return 24
 break;
-case 35:return 26
+case 35:return 25
 break;
-case 36:return 'T_PLS'
+case 36:return 26
 break;
-case 37:return 5
+case 37:return 'T_PLS'
 break;
-case 38:return 'INVALID'
+case 38:return 45
+break;
+case 39:return 5
+break;
+case 40:return 'INVALID'
 break;
 }
 },
-rules: [/^(?:\s+)/,/^(?:"[^"]*")/,/^(?:[0-9]+(\.[0-9]+)?\b)/,/^(?:cp\b)/,/^(?:rm\b)/,/^(?:act\b)/,/^(?:open\b)/,/^(?:cal\b)/,/^(?:title\b)/,/^(?:where\b)/,/^(?:desc\b)/,/^(?:when\b)/,/^(?:search\b)/,/^(?:-)/,/^(?:@)/,/^(?:\/)/,/^(?:;)/,/^(?::)/,/^(?:=)/,/^(?:,)/,/^(?:\{)/,/^(?:\})/,/^(?:[Pp][Mm])/,/^(?:[Aa][Mm])/,/^(?:[Jj](an))/,/^(?:[Ff](eb))/,/^(?:[Mm](ar))/,/^(?:[Aa](pr))/,/^(?:[Mm](ay))/,/^(?:[Jj](un))/,/^(?:[Jj](ul))/,/^(?:[Aa](ug))/,/^(?:[Ss](ep))/,/^(?:[Oo](ct))/,/^(?:[Nn](ov))/,/^(?:[Dd](ec))/,/^(?:pls\b)/,/^(?:$)/,/^(?:.)/],
-conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38],"inclusive":true}}
+rules: [/^(?:\s+)/,/^(?:"[^"]*")/,/^(?:[0-9]+(\.[0-9]+)?\b)/,/^(?:cp\b)/,/^(?:rm\b)/,/^(?:act\b)/,/^(?:open\b)/,/^(?:cal\b)/,/^(?:title\b)/,/^(?:where\b)/,/^(?:desc\b)/,/^(?:when\b)/,/^(?:sea\b)/,/^(?:qsear\b)/,/^(?:-)/,/^(?:@)/,/^(?:\/)/,/^(?:;)/,/^(?::)/,/^(?:=)/,/^(?:,)/,/^(?:\{)/,/^(?:\})/,/^(?:[Pp][Mm])/,/^(?:[Aa][Mm])/,/^(?:[Jj](an))/,/^(?:[Ff](eb))/,/^(?:[Mm](ar))/,/^(?:[Aa](pr))/,/^(?:[Mm](ay))/,/^(?:[Jj](un))/,/^(?:[Jj](ul))/,/^(?:[Aa](ug))/,/^(?:[Ss](ep))/,/^(?:[Oo](ct))/,/^(?:[Nn](ov))/,/^(?:[Dd](ec))/,/^(?:pls\b)/,/^(?:[a-zA-Z0-9]+)/,/^(?:$)/,/^(?:.)/],
+conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40],"inclusive":true}}
 });
 return lexer;
 })();
