@@ -4,7 +4,7 @@
    "version": "1.0",
    "content_security_policy": "script-src 'self' https://calendar.google.com https://apis.google.com; object-src 'self'",
    "permissions": [
-      "tabs", "downloads", "browsingData", "http://*/*", "https://*/*",
+      "tabs", "downloads", "browsingData", "bookmarks", "http://*/*", "https://*/*",
       "https://www.googleapis.com/auth/calendar",
       "*://apis.google.com/*", "pageCapture"
    ],

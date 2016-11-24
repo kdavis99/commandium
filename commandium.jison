@@ -36,6 +36,7 @@
 "when"		      return 'T_WHEN'
 "sea"	      	      return 'T_SEARCH'
 "qsear"	      	      return 'T_QUOTE_SEARCH'
+"ob"		      return 'T_OPEN_BOOKMARK'
 "-"		      return 'T_DASH'
 "@"		      return 'T_AT'
 "/"		      return 'T_SLASH'
@@ -539,5 +540,23 @@ command
                   break;
 	  }
 	}
+     }}
+  | T_OPEN_BOOKMARK T_WORD T_SEMIC
+     {{
+	chrome.bookmarks.search($2, function(results) {
+	  latest_date = new Date(results[0].dateAdded);
+	  latest_bk = results[0];
+	  for (bookmark in results) {
+	    bookmark_date = new Date(results[bookmark].dateAdded);
+	    // console.log(bookmark_date + " && " + latest_date);
+	    if (bookmark_date > latest_date) {
+	      console.log("IN IF" + bookmark_date);
+	      latest_bk = results[bookmark];
+	    }
+	    // console.log(results[bookmark].url);
+	    // console.log(new Date(results[bookmark].dateAdded).toLocaleDateString());
+          }
+	  chrome.tabs.create({url: latest_bk.url});
+        });
      }}
     ;
