@@ -99,7 +99,6 @@ google_cmds
         }
 	console.log(prefix);
 	chrome.tabs.create({url: prefix});
-//	chrome.tabs.create({url: "http://www.google.com/calendar/event?action=TEMPLATE&text=B.B.%20King&dates=20090522T193000/20090524T003000&details=&sprop=website:www.mountainwinery.com&location=The%20Mountain%20Winery,%2014831%20Pierce%20Road,%20Saratoga,%20CA%2095070"});
      }}
   ;
 
@@ -447,6 +446,9 @@ command
 		      word++;
 		      word_count++;
                     }
+		    // count the words in between the start word and the end word,
+		    // if it is greater than 11, assume it was at the wrong start word
+		    // and keep searching
 		    if (word_count > 11) {
 		      word_count = 0;
 		      prefix = "https://www.google.com/#q=";
@@ -465,6 +467,7 @@ command
 	// result is an array of the outer html
 	start_search = $3;
 	end_search = $5;
+	// retrieve the current tabs html content
 	chrome.tabs.executeScript({code: "document.documentElement.outerHTML"},
 	    function (result) {
 	      var prefix = "https://www.google.com/#q=%22";
@@ -484,6 +487,9 @@ command
 		      word++;
 		      word_count++;
                     }
+		    // count the words in between the start word and the end word,
+		    // if it is greater than 11, assume it was at the wrong start word
+		    // and keep searching
 		    if (word_count > 11) {
 		      word_count = 0;
 		      prefix = "https://www.google.com/#q=%22";
@@ -498,21 +504,27 @@ command
      }}
   | T_CP T_NUM_CONST T_SEMIC 
      {{
+	// $2 represents the index of the tab.
+	// tabs are indexed from left to right, and start at 0.
 	chrome.tabs.duplicate(all_tabs[$2].id);
      }}
   | T_RM T_NUM_CONST T_SEMIC 
      {{
+	// $2 represents the index of the tab.
+	// tabs are indexed from left to right, and start at 0.
 	chrome.tabs.remove(all_tabs[$2].id);
      }}
   | T_ACTIVE T_NUM_CONST T_SEMIC 
      {{
+	// $2 represents the index of the tab.
+	// tabs are indexed from left to right, and start at 0.
 	chrome.tabs.update(all_tabs[$2].id, {active: true});
      }}
   | T_CP T_WORD T_SEMIC 
      {{
-	// removes the double quotes (") from a string const
-	// title_substr = $2.substring(1, $2.length - 1).toLowerCase();
 	title_substr = $2.toLowerCase();
+	// search through all of the tabs and copy/create duplicates for
+	// all of the ones that have a substring that matches the query
 	for (m_id in map_tabs) {
 	  if (map_tabs[m_id].url.toLowerCase().includes(title_substr) || 
 		map_tabs[m_id].title.toLowerCase().includes(title_substr)) {
@@ -523,6 +535,8 @@ command
   | T_RM T_WORD T_SEMIC 
      {{
 	title_substr = $2.toLowerCase();
+	// search through all of the tabs and remove all of the ones that
+	// have a substring that matches the query
 	for (m_id in map_tabs) {
 	  if (map_tabs[m_id].url.toLowerCase().includes(title_substr) || 
 		map_tabs[m_id].title.toLowerCase().includes(title_substr)) {
@@ -535,6 +549,7 @@ command
 	title_substr = $2.toLowerCase();
 	for (m_id in map_tabs) {
 	  if (map_tabs[m_id].url.toLowerCase().includes(title_substr) || 
+		// make the first match found the current active tab
 		map_tabs[m_id].title.toLowerCase().includes(title_substr)) {
 		  chrome.tabs.update(map_tabs[m_id].id, {active: true});
                   break;
@@ -544,19 +559,48 @@ command
   | T_OPEN_BOOKMARK T_WORD T_SEMIC
      {{
 	chrome.bookmarks.search($2, function(results) {
+	  // store as a Date variable
 	  latest_date = new Date(results[0].dateAdded);
 	  latest_bk = results[0];
 	  for (bookmark in results) {
 	    bookmark_date = new Date(results[bookmark].dateAdded);
-	    // console.log(bookmark_date + " && " + latest_date);
+            // find the most recently created bookmark that matches
+	    // the query
 	    if (bookmark_date > latest_date) {
-	      console.log("IN IF" + bookmark_date);
 	      latest_bk = results[bookmark];
 	    }
-	    // console.log(results[bookmark].url);
-	    // console.log(new Date(results[bookmark].dateAdded).toLocaleDateString());
           }
+	  // create the new tab
 	  chrome.tabs.create({url: latest_bk.url});
+        });
+     }}
+   | T_OPEN_BOOKMARK T_WORD T_NUM_CONST T_SEMIC
+     {{
+   	var map_bks = {};
+	var map_keys = [];
+	chrome.bookmarks.search($2, function(results) {
+	  for (bookmark in results) {
+	    bookmark_date = new Date(results[bookmark].dateAdded);
+	    map_bks[bookmark_date] = results[bookmark];
+	  }
+
+	  // create separate array of keys for sorting
+	  index = 0;
+	  for (key in map_bks) {
+	    console.log("key = " + key);
+	    map_keys[index] = key;
+	    index++;
+	  }
+
+	  map_keys.sort();
+
+	  // using the sorted array (map_keys), the most recent dates
+	  // are at the end of the array.
+	  // open the most recent matching tabs.
+      	  for (i = map_keys.length - 1; i > (map_keys.length - $3 - 1); i--) {
+	    console.log(i + " = " + map_bks[map_keys[i]].url);
+	    chrome.tabs.create({url: map_bks[map_keys[i]].url});
+	  }
         });
      }}
     ;
