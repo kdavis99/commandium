@@ -34,9 +34,10 @@
 "where"		      return 'T_LOCATION'
 "desc"	      	      return 'T_DESC'
 "when"		      return 'T_WHEN'
-"sea"	      	      return 'T_SEARCH'
-"qsear"	      	      return 'T_QUOTE_SEARCH'
+"search"	      return 'T_SEARCH'
+"qsearch"	      return 'T_QUOTE_SEARCH'
 "ob"		      return 'T_OPEN_BOOKMARK'
+"dl"    	      return 'T_DOWNLOAD'
 "-"		      return 'T_DASH'
 "@"		      return 'T_AT'
 "/"		      return 'T_SLASH'
@@ -455,6 +456,7 @@ command
 		    } else {
 		      prefix = prefix + end_search;
 		      chrome.tabs.create({url: prefix});
+                      break;
 	            }
 	          }
 		}
@@ -561,6 +563,7 @@ command
 	chrome.bookmarks.search($2, function(results) {
 	  // store as a Date variable
 	  latest_date = new Date(results[0].dateAdded);
+	  // bk for bookmark
 	  latest_bk = results[0];
 	  for (bookmark in results) {
 	    bookmark_date = new Date(results[bookmark].dateAdded);
@@ -574,7 +577,7 @@ command
 	  chrome.tabs.create({url: latest_bk.url});
         });
      }}
-   | T_OPEN_BOOKMARK T_WORD T_NUM_CONST T_SEMIC
+  | T_OPEN_BOOKMARK T_WORD T_NUM_CONST T_SEMIC
      {{
    	var map_bks = {};
 	var map_keys = [];
@@ -603,4 +606,12 @@ command
 	  }
         });
      }}
-    ;
+  | T_DOWNLOAD T_SEMIC
+     {{
+         console.log("herrrre");
+         chrome.tabs.getSelected(function(tab) {
+           console.log("herrrre");
+           chrome.downloads.download({url: tab.url});
+         });
+     }}
+   ;
